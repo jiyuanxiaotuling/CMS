@@ -1,0 +1,65 @@
+.top-container{
+    position: absolute;
+    background-color: cornflowerblue;
+    margin: auto;
+    height: 100px;
+    width: 99%;
+    border-radius: 15px;
+}
+.left-container{
+    float: left;
+    margin-top: 130px;
+    background-color: cornflowerblue;
+    height: 750px;
+    width: 200px;
+    border-radius: 15px;
+}
+.right-container{
+    background-color: aquamarine;
+    position: absolute;
+    margin-top: 130px;
+    margin-left: 230px;
+    height: 750px;
+    width: 85%;
+    border-radius: 15px;
+}
+.head-photo{
+    position: relative;
+    height: 200px;
+    background-color: #f441a5;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.head-title{
+    position: absolute;
+    margin-top: 35px;
+    color: white;
+}
+.left-title{
+    position: relative;
+    margin-top: -7px;
+    height: 50px;
+}
+.left-title:hover{
+    background-color: #03a9f4;
+    cursor: pointer;
+}
+.left-title-word{
+    font-family: "Microsoft YaHei UI";
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    top: 18%;
+    transform: translateY(-50%);
+    margin-left: 5px;
+}
+.head-picture{
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-radius: 50%;
+    position: relative;
+    margin: auto auto;
+    top: 20px;
+}

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Desktop/211310314_范柄阳_综合练习/target/test001-1.0-SNAPSHOT/WEB-INF/lib/protobuf-java-3.6.1.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/211310314_范柄阳_综合练习/target/test001-1.0-SNAPSHOT/WEB-INF/lib/mysql-connector-java-8.0.15.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -84,7 +84,28 @@ public class DB {
             return null;
         }
     }
-
+    public ArrayList findCsInfo(){
+        try{
+            pstmt=ct.prepareStatement("select * from customer_info");
+            ArrayList al=new ArrayList();
+            ResultSet rs=pstmt.executeQuery();
+            while(rs.next()){
+                CS cs_info=new CS();
+                cs_info.setCs_name(rs.getString(2));
+                cs_info.setCs_sex(rs.getString(3));
+                cs_info.setCs_phone(rs.getString(4));
+                cs_info.setCs_email(rs.getString(5));
+                cs_info.setCs_address(rs.getString(6));
+                cs_info.setCs_kind(rs.getString(7));
+                cs_info.setCs_remark(rs.getString(8));
+                al.add(cs_info);
+            }
+            return al;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
     public boolean insertUser(String username,String pwd){
         try{
             if(username==""||pwd=="") return false;

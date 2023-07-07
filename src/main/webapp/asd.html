@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="CSS/main.css">
     <script src="JS/showContent.js"></script>
+    <script src="JS/addCustomer.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -40,8 +41,70 @@
       </div>
   </div>
   <div class="right-container">
-    <div id="content1" style="display: block">系统主页</div>
-    <div id="content2" style="display: none">客户管理</div>
+      <div id="modal" class="modal">
+          <div class="modal-content">
+              <span class="close-button" onclick="closeModal()">&times;</span>
+              <form>
+                  <label for="name">姓名：</label>
+                  <input type="text" id="name" name="name"><br><br>
+                  <label for="gender">性别：</label>
+                  <select id="gender" name="gender">
+                      <option value="男">男</option>
+                      <option value="女">女</option>
+                  </select><br><br>
+
+                  <label for="phone">电话：</label>
+                  <input type="text" id="phone" name="phone"><br><br>
+
+                  <label for="email">邮箱：</label>
+                  <input type="email" id="email" name="email"><br><br>
+
+                  <label for="address">地址：</label>
+                  <input type="text" id="address" name="address"><br><br>
+
+                  <label for="category">类别：</label>
+                  <select id="category" name="category">
+                      <option value="客户">已有客户</option>
+                      <option value="VIP客户">潜在客户</option>
+                  </select><br><br>
+
+                  <button type="submit">提交</button>
+              </form>
+          </div>
+      </div>
+    <div id="content1" style="display: block">
+
+    </div>
+<!--      客户管理-->
+    <div id="content2" style="display: none">
+        <div class="em_menu">
+            <h3 style="display: inline-block">客户基本信息</h3>
+            <input id="add_cs" type="button" value="新增客户" onclick="add_cs()">
+        </div>
+        <div id="cs_table_container">
+            <table id="cs_table">
+                <tr style="background-color: cornflowerblue">
+                    <td>姓名</td>
+                    <td width="50">性别</td>
+                    <td width="130">电话</td>
+                    <td>邮箱</td>
+                    <td>地址</td>
+                    <td>类别</td>
+                    <td colspan="2" >操作</td>
+                </tr>
+                <tr>
+                    <td>薄丝菌</td>
+                    <td>男</td>
+                    <td>11451419198</td>
+                    <td>575552896@qq.com</td>
+                    <td>河北省邢台市</td>
+                    <td>潜在客户</td>
+                    <td><input type="button" value="修改"></td>
+                    <td><input type="button" value="删除"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <div id="content3" style="display: none">客服管理</div>
     <div id="content4" style="display: none">市场活动</div>
     <div id="content5" style="display: none">日程安排</div>

@@ -63,3 +63,81 @@
     margin: auto auto;
     top: 20px;
 }
+.em_menu{
+    position: relative;
+    top: 5px;
+    margin: auto;
+    width: 99%;
+    height: 150px;
+    background-color: #ffeb3b;
+    border: 3px solid #45CBFF;
+    border-radius: 15px;
+}
+#add_cs{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    margin-top: 22px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
+#cs_table_container{
+    position: relative;
+    top: 20px;
+    margin: auto;
+    width: 99%;
+    height: 550px;
+    background-color: #f441a5;
+    border: 3px solid #45CBFF;
+    border-radius: 15px;
+    overflow: auto;
+}
+#cs_table{
+    position: relative;
+    border: 2px solid #03a9f4;
+    width: 99%;
+    text-align: center;
+    margin: auto;
+    top: 7px;
+}
+.modal {
+    display: none; /* 默认隐藏 */
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    height: 300px;
+    max-width: 600px;
+}
+
+.close-button {
+    color: #aaa;
+    position: relative;
+    top: -15px;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*调整页面亮度*/
+/*body {*/
+/*    filter: brightness(1); !* 默认亮度 *!*/
+/*    transition: filter 0.5s ease-in-out; !* 添加过渡效果 *!*/
+/*}*/
+/*body.modal-open {*/
+/*    filter: brightness(0.5);*/
+/*}*/

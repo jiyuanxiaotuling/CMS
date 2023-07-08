@@ -52,7 +52,7 @@
             </div>
         </div>
         <%--右侧整个大容器--%>
-        <div class="right-container">
+        <div class="right-container" >
         <%--    系统主页对应的右侧页面--%>
             <div id="content1" style="display: block">
 
@@ -69,29 +69,33 @@
                 <div id="modal" class="modal">
                     <div class="modal-content">
                         <span class="close-button" onclick="closeModal()">&times;</span>
-                        <form>
-                            <label for="name">姓名：</label>
-                            <input type="text" id="name" name="name"><br><br>
-                            <label for="gender">性别：</label>
-                            <select id="gender" name="gender">
-                                <option value="男">男</option>
-                                <option value="女">女</option>
+                        <form action="addCsServlet" method="post">
+                            <label for="Cs_id">ID：</label>
+                            <input type="text" id="Cs_id" name="Cs_id"><br><br>
+                            <label for="Cs_name">姓名：</label>
+                            <input type="text" id="Cs_name" name="Cs_name"><br><br>
+                            <label for="Cs_sex">性别：</label>
+                            <select id="Cs_sex" name="Cs_sex">
+                                <option id="man" value="男">男</option>
+                                <option id="woman" value="女">女</option>
                             </select><br><br>
-
                             <label for="phone">电话：</label>
-                            <input type="text" id="phone" name="phone"><br><br>
+                            <input type="text" id="phone" name="Cs_phone"><br><br>
 
                             <label for="email">邮箱：</label>
-                            <input type="email" id="email" name="email"><br><br>
+                            <input type="email" id="email" name="Cs_email"><br><br>
 
                             <label for="address">地址：</label>
-                            <input type="text" id="address" name="address"><br><br>
+                            <input type="text" id="address" name="Cs_address"><br><br>
 
-                            <label for="category">类别：</label>
-                            <select id="category" name="category">
-                                <option value="客户">已有客户</option>
-                                <option value="VIP客户">潜在客户</option>
+                            <label for="kind">类别：</label>
+                            <select id="kind" name="Cs_kind">
+                                <option value="现有客户">已有客户</option>
+                                <option value="潜在客户">潜在客户</option>
                             </select><br><br>
+
+                            <label for="remark">描述：</label>
+                            <input type="text" id="remark" name="Cs_remark"><br><br>
 
                             <button type="submit">提交</button>
                         </form>
@@ -111,7 +115,7 @@
                             <td colspan="2" width="40">操作</td>
                         </tr>
                         <%
-                            ArrayList al=(ArrayList)session.getAttribute("al");
+                            ArrayList al=new DB().findCsInfo();
                             Iterator iter=al.iterator();
                             while(iter.hasNext()){
                                 CS cs=(CS)iter.next();

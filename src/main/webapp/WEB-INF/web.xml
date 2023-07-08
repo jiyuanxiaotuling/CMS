@@ -31,7 +31,14 @@
         <servlet-name>registerServlet</servlet-name>
         <url-pattern>/registerServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>addCsServlet</servlet-name>
+        <servlet-class>servlet.addCsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addCsServlet</servlet-name>
+        <url-pattern>/addCsServlet</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

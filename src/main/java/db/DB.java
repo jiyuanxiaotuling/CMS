@@ -106,6 +106,26 @@ public class DB {
             return null;
         }
     }
+    public boolean addCs(CS cs){
+        try{
+            System.out.println(cs.getCs_name());
+            System.out.println(cs.getCs_sex());
+            pstmt=ct.prepareStatement("insert into customer_info (cs_name,cs_sex,cs_phone,cs_email,cs_address,cs_kind,cs_remark,cs_id) values(?,?,?,?,?,?,?,?)");
+            pstmt.setString(1, cs.getCs_name());
+            pstmt.setString(2, cs.getCs_sex());
+            pstmt.setString(3, cs.getCs_phone());
+            pstmt.setString(4, cs.getCs_email());
+            pstmt.setString(5, cs.getCs_address());
+            pstmt.setString(6, cs.getCs_kind());
+            pstmt.setString(7, cs.getCs_remark());
+            pstmt.setString(8, cs.getCs_id());
+            pstmt.executeUpdate();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
     public boolean insertUser(String username,String pwd){
         try{
             if(username==""||pwd=="") return false;

@@ -7,3 +7,7 @@ function closeModal() {
     document.getElementById("modal").style.display = "none";
     document.body.classList.add("modal-open");
 }
+
+function addCs(){
+
+}

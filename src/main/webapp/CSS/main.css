@@ -15,7 +15,6 @@
     border-radius: 15px;
 }
 .right-container{
-    background-color: aquamarine;
     position: absolute;
     margin-top: 130px;
     margin-left: 230px;
@@ -26,9 +25,18 @@
 .head-photo{
     position: relative;
     height: 200px;
-    background-color: #f441a5;
+    background-color:cornflowerblue;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+}
+.head-picture{
+    width: 100px;
+    height: 100px;
+    background-color:  #f441a5;
+    border-radius: 50%;
+    position: relative;
+    margin: auto auto;
+    top: 20px;
 }
 .head-title{
     position: absolute;
@@ -54,22 +62,14 @@
     transform: translateY(-50%);
     margin-left: 5px;
 }
-.head-picture{
-    width: 100px;
-    height: 100px;
-    background-color: cornflowerblue;
-    border-radius: 50%;
-    position: relative;
-    margin: auto auto;
-    top: 20px;
-}
+
 .em_menu{
+    background-color: #c7d9eb;
     position: relative;
     top: 5px;
     margin: auto;
     width: 99%;
     height: 150px;
-    background-color: #ffeb3b;
     border: 3px solid #45CBFF;
     border-radius: 15px;
 }
@@ -86,11 +86,11 @@
 }
 #cs_table_container{
     position: relative;
+    background-color: #c7d9eb;
     top: 20px;
     margin: auto;
     width: 99%;
     height: 550px;
-    background-color: #f441a5;
     border: 3px solid #45CBFF;
     border-radius: 15px;
     overflow: auto;

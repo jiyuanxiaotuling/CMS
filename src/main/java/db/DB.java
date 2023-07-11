@@ -91,6 +91,7 @@ public class DB {
             ResultSet rs=pstmt.executeQuery();
             while(rs.next()){
                 CS cs_info=new CS();
+                cs_info.setCs_id(rs.getString(1));
                 cs_info.setCs_name(rs.getString(2));
                 cs_info.setCs_sex(rs.getString(3));
                 cs_info.setCs_phone(rs.getString(4));
@@ -108,8 +109,6 @@ public class DB {
     }
     public boolean addCs(CS cs){
         try{
-            System.out.println(cs.getCs_name());
-            System.out.println(cs.getCs_sex());
             pstmt=ct.prepareStatement("insert into customer_info (cs_name,cs_sex,cs_phone,cs_email,cs_address,cs_kind,cs_remark,cs_id) values(?,?,?,?,?,?,?,?)");
             pstmt.setString(1, cs.getCs_name());
             pstmt.setString(2, cs.getCs_sex());
@@ -119,6 +118,35 @@ public class DB {
             pstmt.setString(6, cs.getCs_kind());
             pstmt.setString(7, cs.getCs_remark());
             pstmt.setString(8, cs.getCs_id());
+            pstmt.executeUpdate();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean modifyCs(CS cs){
+        try{
+            pstmt=ct.prepareStatement("UPDATE customer_info SET cs_name=?,cs_sex=?,cs_phone=?,cs_email=?,cs_address=?,cs_kind=?,cs_remark=? WHERE cs_id=?");
+            pstmt.setString(1, cs.getCs_name());
+            pstmt.setString(2, cs.getCs_sex());
+            pstmt.setString(3, cs.getCs_phone());
+            pstmt.setString(4, cs.getCs_email());
+            pstmt.setString(5, cs.getCs_address());
+            pstmt.setString(6, cs.getCs_kind());
+            pstmt.setString(7, cs.getCs_remark());
+            pstmt.setString(8, cs.getCs_id());
+            pstmt.executeUpdate();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean deleteCs(String id){
+        try{
+            pstmt=ct.prepareStatement("DELETE from customer_info WHERE cs_id=?");
+            pstmt.setString(1,id);
             pstmt.executeUpdate();
             return true;
         }catch(Exception e){

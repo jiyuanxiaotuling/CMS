@@ -10,9 +10,10 @@
 <%@ page import="model.CS" %>
 <html>
     <head>
-        <link rel="stylesheet" href="CSS/main.css">
-        <script src="JS/showContent.js"></script>
-        <script src="JS/addCustomer.js"></script>
+<%--        此处用了强制加载CSS属性，全部完工后可以删除--%>
+        <link rel="stylesheet" type="text/css" href="CSS/main.css?v=<%= System.currentTimeMillis() %>">
+        <script charset="utf-8" src="JS/showContent.js"></script>
+        <script charset="utf-8"  src="JS/CRUD_Cs.js"></script>
         <title>客户资源管理</title>
     </head>
     <body>
@@ -70,7 +71,7 @@
                     <div class="modal-content">
                         <span class="close-button" onclick="closeModal()">&times;</span>
                         <form action="addCsServlet" method="post">
-                            <label for="Cs_id">ID：</label>
+                            <label for="Cs_id">&nbsp;I&nbsp;D：&nbsp;</label>
                             <input type="text" id="Cs_id" name="Cs_id"><br><br>
                             <label for="Cs_name">姓名：</label>
                             <input type="text" id="Cs_name" name="Cs_name"><br><br>
@@ -90,14 +91,14 @@
 
                             <label for="kind">类别：</label>
                             <select id="kind" name="Cs_kind">
-                                <option value="现有客户">已有客户</option>
+                                <option value="现有客户">现有客户</option>
                                 <option value="潜在客户">潜在客户</option>
                             </select><br><br>
 
                             <label for="remark">描述：</label>
                             <input type="text" id="remark" name="Cs_remark"><br><br>
-
-                            <button type="submit">提交</button>
+                            <button type="submit" id="cs_submit_btn" name="Cs_btn" value="提交">提交</button>
+                            <button type="submit" id="cs_modify_btn" name="Cs_btn" value="修改" style="display: none">修改</button>
                         </form>
                     </div>
                 </div>
@@ -105,6 +106,7 @@
                 <div id="cs_table_container">
                     <table id="cs_table">
                         <tr style="background-color: cornflowerblue">
+                            <td>ID</td>
                             <td>姓名</td>
                             <td width="50">性别</td>
                             <td width="150">电话</td>
@@ -117,10 +119,14 @@
                         <%
                             ArrayList al=new DB().findCsInfo();
                             Iterator iter=al.iterator();
+//                          用来确定是哪一行的按钮
+                            int i = 0;
                             while(iter.hasNext()){
                                 CS cs=(CS)iter.next();
+                                i++;
                         %>
                         <tr>
+                            <td><%= cs.getCs_id()%></td>
                             <td><%= cs.getCs_name() %></td>
                             <td><%= cs.getCs_sex() %></td>
                             <td><%= cs.getCs_phone() %></td>
@@ -128,11 +134,11 @@
                             <td><%= cs.getCs_address() %></td>
                             <td><%= cs.getCs_kind() %></td>
                             <td><%= cs.getCs_remark() %></td>
-                            <td><input type="button" value="修改"></td>
-                            <td><input type="button" value="删除"></td>
+                            <td><input type="button" value="修改" class="cs_modify" onclick="modify_cs(<%= i%>)"></td>
+                            <td><input type="button" value="删除" class="cs_modify" onclick="delete_cs(<%= i%>)"></td>
                         </tr>
                             <%
-                                }
+                            }
                             %>
                     </table>
                 </div>

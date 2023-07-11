@@ -115,7 +115,7 @@
     padding: 20px;
     border: 1px solid #888;
     width: 300px;
-    height: 400px;
+    height: 380px;
     max-width: 600px;
 }
 
@@ -132,6 +132,13 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+.cs_modify{
+    background-color: transparent;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
 }
 /*调整页面亮度*/
 /*body {*/

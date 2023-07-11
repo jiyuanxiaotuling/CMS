@@ -39,6 +39,13 @@
         <servlet-name>addCsServlet</servlet-name>
         <url-pattern>/addCsServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>deleteServlet</servlet-name>
+        <servlet-class>servlet.deleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteServlet</servlet-name>
+        <url-pattern>/deleteServlet</url-pattern>
+    </servlet-mapping>
 
 </web-app>

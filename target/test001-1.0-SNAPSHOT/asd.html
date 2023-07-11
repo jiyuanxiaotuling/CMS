@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="CSS/main.css">
     <script src="JS/showContent.js"></script>
-    <script src="JS/addCustomer.js"></script>
+    <script src="JS/CRUD_Cs.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -45,6 +45,8 @@
           <div class="modal-content">
               <span class="close-button" onclick="closeModal()">&times;</span>
               <form>
+                  <label for="id">&nbsp;I&nbsp;D：&nbsp;</label>
+                  <input type="text" id="id" name="id"><br><br>
                   <label for="name">姓名：</label>
                   <input type="text" id="name" name="name"><br><br>
                   <label for="gender">性别：</label>
@@ -99,7 +101,7 @@
                     <td>575552896@qq.com</td>
                     <td>河北省邢台市</td>
                     <td>潜在客户</td>
-                    <td><input type="button" value="修改"></td>
+                    <td><input type="button" value="修改" onclick="modify_cs(2)"></td>
                     <td><input type="button" value="删除"></td>
                 </tr>
             </table>

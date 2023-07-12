@@ -1,5 +1,5 @@
 function add_cs() {
-    document.getElementById("Cs_id").value = "";
+    document.getElementById("Cs_id").value = null;
     document.getElementById("Cs_name").value = null;
     document.getElementById("Cs_sex").options[0].selected = true;
     document.getElementById("phone").value = null;
@@ -56,4 +56,36 @@ function delete_cs(i){
     if (confirm("确定要删除客户 " + name + " 的记录吗？")) {
         window.location.href = "deleteServlet?action=delete&id=" + id;
     }
+}
+function print_cs_table(){
+    var printContents = document.getElementById("cs_table").outerHTML;
+    var originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+}
+function print_cs(i){
+    var t = document.getElementById("cs_table");
+    var row = t.rows[i];
+    var rowData = '';
+    rowData += '<tr><td>ID:</td><td>' + row.cells[0].innerText + '</td></tr>';
+    rowData += '<tr><td>姓名:</td><td>' + row.cells[1].innerText + '</td></tr>';
+    rowData += '<tr><td>性别:</td><td>' + row.cells[2].innerText + '</td></tr>';
+    rowData += '<tr><td>电话:</td><td>' + row.cells[3].innerText + '</td></tr>';
+    rowData += '<tr><td>邮箱:</td><td>' + row.cells[4].innerText + '</td></tr>';
+    rowData += '<tr><td>地址:</td><td>' + row.cells[5].innerText + '</td></tr>';
+    rowData += '<tr><td>类别:</td><td>' + row.cells[6].innerText + '</td></tr>';
+    rowData += '<tr><td>描述:</td><td>' + row.cells[7].innerText + '</td></tr>';
+    var printView = '<table>' + rowData + '</table>';
+    var printWindow = window.open('', '', 'height=500,width=800');
+    printWindow.document.write('<html><head><title>打印表格</title></head><body>' + printView + '</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+    printWindow.close();
+    // document.body.classList.add("modal-open");
+    // var modalContent = document.getElementById("modal").innerHTML;
+    // var originalContent = document.body.innerHTML;
+    // document.body.innerHTML = modalContent;
+    // window.print();
+    // document.body.innerHTML = originalContent;
 }

@@ -84,6 +84,17 @@
     border: 2px solid #45CBFF;
     cursor: pointer;
 }
+#print_cs_table{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: -69px;
+    margin-top: 62px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
 #cs_table_container{
     position: relative;
     background-color: #c7d9eb;
@@ -140,6 +151,28 @@
     cursor: pointer;
     text-decoration: underline;
 }
+@media print {
+    #cs_table {
+        border-collapse: collapse;
+        width: 100%;
+        border: black;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #ddd;
+    }
+    tr td:nth-last-child(-n+3) {
+        display: none;
+    }
+    tr th:nth-last-child(1) {
+        display: none;
+    }
+}
+
 /*调整页面亮度*/
 /*body {*/
 /*    filter: brightness(1); !* 默认亮度 *!*/

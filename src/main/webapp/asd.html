@@ -82,17 +82,18 @@
         <div class="em_menu">
             <h3 style="display: inline-block">客户基本信息</h3>
             <input id="add_cs" type="button" value="新增客户" onclick="add_cs()">
+            <input id="print_cs_table" type="button" value="打印表格" onclick="print_cs_table()">
         </div>
         <div id="cs_table_container">
             <table id="cs_table">
                 <tr style="background-color: cornflowerblue">
-                    <td>姓名</td>
-                    <td width="50">性别</td>
-                    <td width="130">电话</td>
-                    <td>邮箱</td>
-                    <td>地址</td>
-                    <td>类别</td>
-                    <td colspan="2" >操作</td>
+                    <th>姓名</th>
+                    <th width="50">性别</th>
+                    <th width="130">电话</th>
+                    <th>邮箱</th>
+                    <th>地址</th>
+                    <th>类别</th>
+                    <th colspan="3" >操作</th>
                 </tr>
                 <tr>
                     <td>薄丝菌</td>
@@ -101,8 +102,9 @@
                     <td>575552896@qq.com</td>
                     <td>河北省邢台市</td>
                     <td>潜在客户</td>
-                    <td><input type="button" value="修改" onclick="modify_cs(2)"></td>
-                    <td><input type="button" value="删除"></td>
+                    <td width="25"><input type="button" class="cs_modify" value="修改" onclick="modify_cs(2)"></td>
+                    <td width="25"><input type="button" class="cs_modify" value="删除"></td>
+                    <td width="25"><input type="button" class="cs_modify" value="打印" onclick="print_cs(1)"></td>
                 </tr>
             </table>
         </div>

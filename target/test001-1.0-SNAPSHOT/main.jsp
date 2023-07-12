@@ -12,8 +12,8 @@
     <head>
 <%--        此处用了强制加载CSS属性，全部完工后可以删除--%>
         <link rel="stylesheet" type="text/css" href="CSS/main.css?v=<%= System.currentTimeMillis() %>">
-        <script charset="utf-8" src="JS/showContent.js"></script>
-        <script charset="utf-8"  src="JS/CRUD_Cs.js"></script>
+        <script charset="utf-8" src="JS/showContent.js?v=<%= System.currentTimeMillis() %>"></script>
+        <script charset="utf-8"  src="JS/CRUD_Cs.js?v=<%= System.currentTimeMillis() %>"></script>
         <title>客户资源管理</title>
     </head>
     <body>
@@ -65,6 +65,7 @@
                 <div class="em_menu">
                     <h3 style="display: inline-block">客户基本信息</h3>
                     <input id="add_cs" type="button" value="新增客户" onclick="add_cs()">
+                    <input id="print_cs_table" type="button" value="打印表格" onclick="print_cs_table()">
                 </div>
                 <%--    新增客户按钮的相应div，默认隐藏--%>
                 <div id="modal" class="modal">
@@ -106,15 +107,15 @@
                 <div id="cs_table_container">
                     <table id="cs_table">
                         <tr style="background-color: cornflowerblue">
-                            <td>ID</td>
-                            <td>姓名</td>
-                            <td width="50">性别</td>
-                            <td width="150">电话</td>
-                            <td>邮箱</td>
-                            <td>地址</td>
-                            <td>类别</td>
-                            <td>描述</td>
-                            <td colspan="2" width="40">操作</td>
+                            <th>ID</th>
+                            <th>姓名</th>
+                            <th width="50">性别</th>
+                            <th width="150">电话</th>
+                            <th>邮箱</th>
+                            <th>地址</th>
+                            <th>类别</th>
+                            <th>描述</th>
+                            <th colspan="3" >操作</th>
                         </tr>
                         <%
                             ArrayList al=new DB().findCsInfo();
@@ -134,8 +135,9 @@
                             <td><%= cs.getCs_address() %></td>
                             <td><%= cs.getCs_kind() %></td>
                             <td><%= cs.getCs_remark() %></td>
-                            <td><input type="button" value="修改" class="cs_modify" onclick="modify_cs(<%= i%>)"></td>
-                            <td><input type="button" value="删除" class="cs_modify" onclick="delete_cs(<%= i%>)"></td>
+                            <td width="25"><input type="button" value="修改" class="cs_modify" onclick="modify_cs(<%= i%>)"></td>
+                            <td width="25"><input type="button" value="删除" class="cs_modify" onclick="delete_cs(<%= i%>)"></td>
+                            <td width="25"><input type="button" value="打印" class="cs_modify" onclick="print_cs(<%= i%>)"></td>
                         </tr>
                             <%
                             }

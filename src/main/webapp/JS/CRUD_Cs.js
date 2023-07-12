@@ -1,4 +1,12 @@
 function add_cs() {
+    document.getElementById("Cs_id").value = "";
+    document.getElementById("Cs_name").value = null;
+    document.getElementById("Cs_sex").options[0].selected = true;
+    document.getElementById("phone").value = null;
+    document.getElementById("email").value = null;
+    document.getElementById("address").value =null;
+    document.getElementById("kind").options[0].selected = true;
+    document.getElementById("remark").value = null;
     document.getElementById("modal").style.display = "block";
     document.getElementById("cs_submit_btn").style.display = "block";
     document.getElementById("cs_modify_btn").style.display = "none";
@@ -45,7 +53,7 @@ function delete_cs(i){
     var t = document.getElementById("cs_table");
     var id = t.rows[i].cells[0].innerText;
     var name = t.rows[i].cells[1].innerText;
-    if (confirm("确定要删除客户" + name + "的记录吗？")) {
+    if (confirm("确定要删除客户 " + name + " 的记录吗？")) {
         window.location.href = "deleteServlet?action=delete&id=" + id;
     }
 }

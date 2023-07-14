@@ -8,6 +8,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="gb2312"%>
 <%@ page import="db.DB"%>
 <%@ page import="model.CS" %>
+<%@ page import="javax.lang.model.type.ArrayType" %>
 <html>
     <head>
 <%--        此处用了强制加载CSS属性，全部完工后可以删除--%>
@@ -61,9 +62,20 @@
         <!--      客户管理对应的右侧页面-->
             <div id="content2" style="display: none">
         <%--        顶部容器--%>
-
                 <div class="em_menu">
                     <h3 style="display: inline-block">客户基本信息</h3>
+                    <select id="cs_classify_select">
+                        <option value="cs_id">ID</option>
+                        <option value="cs_name">姓名</option>
+                        <option value="cs_sex">性别</option>
+                        <option value="cs_phone">电话</option>
+                        <option value="cs_email">邮箱</option>
+                        <option value="cs_address">地址</option>
+                        <option value="cs_kind">类别</option>
+                    </select>
+                    <input id="cs_classify_outer" readonly>
+                    <input id="cs_classify_inner" >
+                    <input id="cs_classify_btn" type="submit" value="" onclick="classifyCs()">
                     <input id="add_cs" type="button" value="新增客户" onclick="add_cs()">
                     <input id="print_cs_table" type="button" value="打印表格" onclick="print_cs_table()">
                 </div>
@@ -118,8 +130,13 @@
                             <th colspan="3" >操作</th>
                         </tr>
                         <%
-                            ArrayList al=new DB().findCsInfo();
-                            Iterator iter=al.iterator();
+                            ArrayList al1=new DB().findCsInfo();
+                            Iterator iter=al1.iterator();
+                            ArrayList al2;
+                            if(session.getAttribute("al") != null){
+                                al2 = (ArrayList) session.getAttribute("al");
+                                iter = al2.iterator();
+                            }
 //                          用来确定是哪一行的按钮
                             int i = 0;
                             while(iter.hasNext()){

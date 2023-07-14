@@ -81,6 +81,18 @@
     <div id="content2" style="display: none">
         <div class="em_menu">
             <h3 style="display: inline-block">客户基本信息</h3>
+            <select id="cs_classify_select">
+                <option>I D</option>
+                <option>姓名</option>
+                <option>性别</option>
+                <option>电话</option>
+                <option>邮箱</option>
+                <option>地址</option>
+                <option>类别</option>
+            </select>
+            <input id="cs_classify_outer" readonly>
+            <input id="cs_classify_inner" >
+            <input id="cs_classify_btn" type="submit" value="">
             <input id="add_cs" type="button" value="新增客户" onclick="add_cs()">
             <input id="print_cs_table" type="button" value="打印表格" onclick="print_cs_table()">
         </div>

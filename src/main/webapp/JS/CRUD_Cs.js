@@ -89,3 +89,18 @@ function print_cs(i){
     // window.print();
     // document.body.innerHTML = originalContent;
 }
+function classifyCs(){
+    var xhr = new XMLHttpRequest();
+    var branch = document.getElementById("cs_classify_select").value;
+    var keyword = document.getElementById("cs_classify_inner").value;
+    xhr.open('POST', 'classifyCsServlet', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            // 处理 Servlet 返回的数据
+            console.log(this.responseText);
+        }
+    };
+    xhr.send('branch=' + encodeURIComponent(branch) + '&keyword='  + encodeURIComponent(keyword));
+    window.location.reload();
+}

@@ -47,5 +47,12 @@
         <servlet-name>deleteServlet</servlet-name>
         <url-pattern>/deleteServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>classifyCsServlet</servlet-name>
+        <servlet-class>servlet.classifyCsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>classifyCsServlet</servlet-name>
+        <url-pattern>/classifyCsServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

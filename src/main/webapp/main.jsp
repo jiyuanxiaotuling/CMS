@@ -54,13 +54,13 @@
             </div>
         </div>
         <%--右侧整个大容器--%>
-        <div class="right-container" >
+        <div class="right-container" class="main_content">
         <%--    系统主页对应的右侧页面--%>
             <div id="content1" style="display: block">
 
             </div>
         <!--      客户管理对应的右侧页面-->
-            <div id="content2" style="display: none">
+            <div id="content2" style="display: none" class="main_content">
         <%--        顶部容器--%>
                 <div class="em_menu">
                     <h3 style="display: inline-block">客户基本信息</h3>
@@ -162,11 +162,11 @@
                     </table>
                 </div>
             </div>
-            <div id="content3" style="display: none">客服管理</div>
-            <div id="content4" style="display: none">市场活动</div>
-            <div id="content5" style="display: none">日程安排</div>
-            <div id="content6" style="display: none">数据管理</div>
-            <div id="content7" style="display: none">系统管理</div>
+            <div id="content3" style="display: none" class="main_content">客服管理</div>
+            <div id="content4" style="display: none" class="main_content">市场活动</div>
+            <div id="content5" style="display: none" class="main_content">日程安排</div>
+            <div id="content6" style="display: none" class="main_content">数据管理</div>
+            <div id="content7" style="display: none" class="main_content">系统管理</div>
         </div>
     </body>
 </html>

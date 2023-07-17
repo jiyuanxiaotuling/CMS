@@ -102,5 +102,36 @@ function classifyCs(){
         }
     };
     xhr.send('branch=' + encodeURIComponent(branch) + '&keyword='  + encodeURIComponent(keyword));
+    // var divIsVisible = document.getElementById("content2").style.display !== 'none';
+    // localStorage.setItem('divIsVisible', divIsVisible);
     window.location.reload();
 }
+function saveDivStates() {
+    // 保存每个 div 的显示状态到 sessionStorage 中
+    var divs = document.querySelectorAll('.main_content');
+    for (var i = 0; i < divs.length; i++) {
+        var id = divs[i].id;
+        var isVisible = divs[i].style.display !== 'none';
+        sessionStorage.setItem(id, isVisible);
+    }
+}
+function restoreDivStates() {
+    // 从 sessionStorage 中恢复每个 div 的显示状态
+    var divs = document.querySelectorAll('.main_content');
+    for (var i = 0; i < divs.length; i++) {
+        var id = divs[i].id;
+        var isVisible = sessionStorage.getItem(id);
+        if (isVisible === 'true') {
+            divs[i].style.display = 'block';
+        } else {
+            divs[i].style.display = 'none';
+        }
+    }
+}
+window.onload = function() {
+    restoreDivStates();
+};
+// 在页面卸载时，保存每个 div 的显示状态
+window.onunload = function() {
+    saveDivStates();
+};

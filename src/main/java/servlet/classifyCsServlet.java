@@ -19,13 +19,16 @@ public class classifyCsServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         String branch = request.getParameter("branch");
         String keyword = request.getParameter("keyword");
-        System.out.println(branch);
-        System.out.println(keyword);
         DB db=new DB();
         HttpSession session=request.getSession();
         ArrayList al=db.findCsInfo(branch,keyword);
-        session.setAttribute("al", al);
-        response.sendRedirect("main.jsp");
+        if(keyword == null){
+            response.sendRedirect("main.jsp");
+        }else{
+            session.setAttribute("al", al);
+            response.sendRedirect("main.jsp");
+        }
+
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

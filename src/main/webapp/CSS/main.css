@@ -213,6 +213,20 @@
     border: none;
     z-index: 2;
 }
+.refresh-button {
+    display: inline-block;
+    position: absolute;
+    top: 108px;
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    background-image: url("icon/refresh.png");
+    background-size: cover;
+    cursor: pointer;
+    border: none;
+}
 /*调整页面亮度*/
 /*body {*/
 /*    filter: brightness(1); !* 默认亮度 *!*/

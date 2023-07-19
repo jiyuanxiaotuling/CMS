@@ -102,8 +102,21 @@ function classifyCs(){
         }
     };
     xhr.send('branch=' + encodeURIComponent(branch) + '&keyword='  + encodeURIComponent(keyword));
-    // var divIsVisible = document.getElementById("content2").style.display !== 'none';
-    // localStorage.setItem('divIsVisible', divIsVisible);
+    window.location.reload();
+}
+function refresh_page(){
+    var xhr = new XMLHttpRequest();
+    var branch = document.getElementById("cs_classify_select").value;
+    var keyword = document.getElementById("cs_classify_inner").value;
+    xhr.open('POST', 'classifyCsServlet', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            // 处理 Servlet 返回的数据
+            console.log(this.responseText);
+        }
+    };
+    xhr.send('branch=' + encodeURIComponent(branch) + '&keyword='  + encodeURIComponent(keyword));
     window.location.reload();
 }
 function saveDivStates() {
@@ -115,6 +128,7 @@ function saveDivStates() {
         sessionStorage.setItem(id, isVisible);
     }
 }
+
 function restoreDivStates() {
     // 从 sessionStorage 中恢复每个 div 的显示状态
     var divs = document.querySelectorAll('.main_content');

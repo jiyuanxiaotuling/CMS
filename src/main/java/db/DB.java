@@ -110,8 +110,12 @@ public class DB {
     }
     public ArrayList findCsInfo(String br,String key){
         try{
-            pstmt=ct.prepareStatement("select * from customer_info where "+ br +" like ?");
-            pstmt.setString(1,"%" + key + "%");
+            if(key == null){
+                pstmt = ct.prepareStatement("select * from customer_info");
+            }else{
+                pstmt=ct.prepareStatement("select * from customer_info where "+ br +" like ?");
+                pstmt.setString(1,"%" + key + "%");
+            }
             ArrayList al = new ArrayList();
             ResultSet rs=pstmt.executeQuery();
             while(rs.next()){

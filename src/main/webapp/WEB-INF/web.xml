@@ -55,4 +55,28 @@
         <servlet-name>classifyCsServlet</servlet-name>
         <url-pattern>/classifyCsServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>classifyEmServlet</servlet-name>
+        <servlet-class>servlet.classifyEmServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>classifyEmServlet</servlet-name>
+        <url-pattern>/classifyEmServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>addEmServlet</servlet-name>
+        <servlet-class>servlet.addEmServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>addEmServlet</servlet-name>
+    <url-pattern>/addEmServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>deleteEmServlet</servlet-name>
+        <servlet-class>servlet.deleteEmServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteEmServlet</servlet-name>
+        <url-pattern>/deleteEmServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

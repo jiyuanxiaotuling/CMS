@@ -21,11 +21,11 @@ public class classifyCsServlet extends HttpServlet {
         String keyword = request.getParameter("keyword");
         DB db=new DB();
         HttpSession session=request.getSession();
-        ArrayList al=db.findCsInfo(branch,keyword);
+        ArrayList cs_al=db.findCsInfo(branch,keyword);
         if(keyword == null){
             response.sendRedirect("main.jsp");
         }else{
-            session.setAttribute("al", al);
+            session.setAttribute("cs_al", cs_al);
             response.sendRedirect("main.jsp");
         }
 

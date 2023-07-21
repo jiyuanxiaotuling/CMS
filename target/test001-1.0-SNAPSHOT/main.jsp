@@ -9,6 +9,7 @@
 <%@ page import="db.DB"%>
 <%@ page import="model.CS" %>
 <%@ page import="javax.lang.model.type.ArrayType" %>
+<%@ page import="model.EM" %>
 <html>
     <head>
 <%--        此处用了强制加载CSS属性，全部完工后可以删除--%>
@@ -50,7 +51,7 @@
                 <p class="left-title-word">数据管理</p>
             </div>
             <div class="left-title" onclick="showContent(7)">
-                <p class="left-title-word">系统管理</p>
+                <p class="left-title-word">员工管理</p>
             </div>
         </div>
         <%--右侧整个大容器--%>
@@ -76,7 +77,7 @@
                     <input id="cs_classify_outer" readonly>
                     <input id="cs_classify_inner" >
                     <input id="cs_classify_btn" type="submit" value="" onclick="classifyCs()">
-                    <input class="refresh-button" type="button" onclick="refresh_page()">
+                    <input class="refresh-button" type="button" onclick="cs_refresh_page()">
                     <input id="add_cs" type="button" value="新增客户" onclick="add_cs()">
                     <input id="print_cs_table" type="button" value="打印表格" onclick="print_cs_table()">
                 </div>
@@ -111,8 +112,8 @@
 
                             <label for="remark">描述：</label>
                             <input type="text" id="remark" name="Cs_remark"><br><br>
-                            <button type="submit" id="cs_submit_btn" name="Cs_btn" value="提交">提交</button>
-                            <button type="submit" id="cs_modify_btn" name="Cs_btn" value="修改" style="display: none">修改</button>
+                            <button type="submit" class="cs_btn" id="cs_submit_btn" name="Cs_btn" value="提交" >提交</button>
+                            <button type="submit" class="cs_btn" id="cs_modify_btn" name="Cs_btn" value="修改" style="display: none;">修改</button>
                         </form>
                     </div>
                 </div>
@@ -131,18 +132,18 @@
                             <th colspan="3" >操作</th>
                         </tr>
                         <%
-                            ArrayList al1=new DB().findCsInfo();
-                            Iterator iter=al1.iterator();
-                            ArrayList al2;
-                            if(session.getAttribute("al") != null){
-                                al2 = (ArrayList) session.getAttribute("al");
-                                iter = al2.iterator();
+                            ArrayList cs_al1=new DB().findCsInfo();
+                            Iterator cs_iter=cs_al1.iterator();
+                            ArrayList cs_al2;
+                            if(session.getAttribute("cs_al") != null){
+                                cs_al2 = (ArrayList) session.getAttribute("cs_al");
+                                cs_iter = cs_al2.iterator();
                             }
 //                          用来确定是哪一行的按钮
-                            int i = 0;
-                            while(iter.hasNext()){
-                                CS cs=(CS)iter.next();
-                                i++;
+                            int cs_i = 0;
+                            while(cs_iter.hasNext()){
+                                CS cs=(CS)cs_iter.next();
+                                cs_i++;
                         %>
                         <tr>
                             <td><%= cs.getCs_id()%></td>
@@ -153,9 +154,9 @@
                             <td><%= cs.getCs_address() %></td>
                             <td><%= cs.getCs_kind() %></td>
                             <td><%= cs.getCs_remark() %></td>
-                            <td width="25"><input type="button" value="修改" class="cs_modify" onclick="modify_cs(<%= i%>)"></td>
-                            <td width="25"><input type="button" value="删除" class="cs_modify" onclick="delete_cs(<%= i%>)"></td>
-                            <td width="25"><input type="button" value="打印" class="cs_modify" onclick="print_cs(<%= i%>)"></td>
+                            <td width="25"><input type="button" value="修改" class="cs_modify" onclick="modify_cs(<%= cs_i%>)"></td>
+                            <td width="25"><input type="button" value="删除" class="cs_modify" onclick="delete_cs(<%= cs_i%>)"></td>
+                            <td width="25"><input type="button" value="打印" class="cs_modify" onclick="print_cs(<%= cs_i%>)"></td>
                         </tr>
                             <%
                             }
@@ -163,11 +164,112 @@
                     </table>
                 </div>
             </div>
-            <div id="content3" style="display: none" class="main_content">客服管理</div>
+            <div id="content3" style="display: none" class="main_content">
+
+            </div>
             <div id="content4" style="display: none" class="main_content">市场活动</div>
             <div id="content5" style="display: none" class="main_content">日程安排</div>
             <div id="content6" style="display: none" class="main_content">数据管理</div>
-            <div id="content7" style="display: none" class="main_content">系统管理</div>
+            <div id="content7" style="display: none" class="main_content">
+                <div class="em_menu">
+                    <h3 style="display: inline-block">客户基本信息</h3>
+                    <select id="em_classify_select">
+                        <option value="em_id">ID</option>
+                        <option value="em_name">姓名</option>
+                        <option value="em_gender">性别</option>
+                        <option value="em_age">年龄</option>
+                        <option value="em_position">职位</option>
+                        <option value="em_department">部门</option>
+                        <option value="em_phone">电话</option>
+                        <option value="em_email">邮箱</option>
+                    </select>
+                    <input id="em_classify_outer" readonly>
+                    <input id="em_classify_inner" >
+                    <input id="em_classify_btn" type="submit" value="" onclick="classifyEm()">
+                    <input class="refresh-button" type="button" onclick="em_refresh_page()">
+                    <input id="add_em" type="button" value="添加员工" onclick="add_em()">
+                    <input id="print_em_table" type="button" value="打印表格" onclick="print_em_table()">
+                </div>
+                <%--    添加员工按钮的相应div，默认隐藏--%>
+                <div id="em_modal" class="em_modal">
+                    <div class="modal-content">
+                        <span class="close-button" onclick="closeEmModal()">&times;</span>
+                        <form action="addEmServlet" method="post">
+                            <label for="em_id">&nbsp;I&nbsp;D：&nbsp;</label>
+                            <input type="text" id="em_id" name="em_id"><br><br>
+                            <label for="em_name">姓名：</label>
+                            <input type="text" id="em_name" name="em_name"><br><br>
+                            <label for="em_gender">性别：</label>
+                            <select id="em_gender" name="em_gender">
+                                <option  value="男">男</option>
+                                <option  value="女">女</option>
+                            </select><br><br>
+                            <label for="em_age">年龄：</label>
+                            <input type="text" id="em_age" name="em_age"><br><br>
+
+                            <label for="em_position">职位：</label>
+                            <input type="text" id="em_position" name="em_position"><br><br>
+
+                            <label for="em_department">部门：</label>
+                            <input type="text" id="em_department" name="em_department"><br><br>
+
+                            <label for="em_phone">电话：</label>
+                            <input type="text" id="em_phone" name="em_phone"><br><br>
+
+                            <label for="em_email">邮箱：</label>
+                            <input type="email" id="em_email" name="em_email"><br><br>
+                            <button type="submit" class="em_btn" id="em_submit_btn" name="em_btn" value="提交" >提交</button>
+                            <button type="submit" class="em_btn" id="em_modify_btn" name="em_btn" value="修改" style="display: none;">修改</button>
+                        </form>
+                    </div>
+                </div>
+                <%--    用户表格存放容器--%>
+                <div id="em_table_container">
+                    <table id="em_table">
+                        <tr style="background-color: cornflowerblue">
+                            <th>ID</th>
+                            <th>姓名</th>
+                            <th width="50">性别</th>
+                            <th width="50">年龄</th>
+                            <th>职位</th>
+                            <th>部门</th>
+                            <th>电话</th>
+                            <th>邮箱</th>
+                            <th colspan="3" >操作</th>
+                        </tr>
+                        <%
+                            ArrayList em_al1=new DB().findEmInfo();
+                            Iterator em_iter=em_al1.iterator();
+                            ArrayList em_al2;
+                            if(session.getAttribute("em_al") != null){
+                                em_al2 = (ArrayList) session.getAttribute("em_al");
+                                em_iter = em_al2.iterator();
+                            }
+//                          用来确定是哪一行的按钮
+                            int em_i = 0;
+                            while(em_iter.hasNext()){
+                                EM em=(EM)em_iter.next();
+                                em_i++;
+                        %>
+                        <tr>
+                            <td><%= em.getEm_id()%></td>
+                            <td><%= em.getEm_name() %></td>
+                            <td><%= em.getEm_gender() %></td>
+                            <td><%= em.getEm_age() %></td>
+                            <td><%= em.getEm_position() %></td>
+                            <td><%= em.getEm_department() %></td>
+                            <td><%= em.getEm_phone() %></td>
+                            <td><%= em.getEm_email() %></td>
+                            <td width="25"><input type="button" value="修改" class="cs_modify" onclick="modify_em(<%= em_i%>)"></td>
+                            <td width="25"><input type="button" value="删除" class="cs_modify" onclick="delete_em(<%= em_i%>)"></td>
+                            <td width="25"><input type="button" value="打印" class="cs_modify" onclick="print_em(<%= em_i%>)"></td>
+                        </tr>
+                        <%
+                            }
+                        %>
+                    </table>
+                </div>
+            </div>
         </div>
     </body>
 </html>

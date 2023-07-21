@@ -32,11 +32,12 @@
 .head-picture{
     width: 100px;
     height: 100px;
-    background-color:  #f441a5;
     border-radius: 50%;
     position: relative;
     margin: auto auto;
     top: 20px;
+    background-image: url("icon/avatar.png");
+    background-size: cover;
 }
 .head-title{
     position: absolute;
@@ -84,7 +85,29 @@
     border: 2px solid #45CBFF;
     cursor: pointer;
 }
+#add_em{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    margin-top: 22px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
 #print_cs_table{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: -69px;
+    margin-top: 62px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
+#print_em_table{
     position: relative;
     display: inline-block;
     float: right;
@@ -106,7 +129,27 @@
     border-radius: 15px;
     overflow: auto;
 }
+
+#em_table_container{
+    position: relative;
+    background-color: #c7d9eb;
+    top: 20px;
+    margin: auto;
+    width: 99%;
+    height: 550px;
+    border: 3px solid #45CBFF;
+    border-radius: 15px;
+    overflow: auto;
+}
 #cs_table{
+    position: relative;
+    border: 2px solid #03a9f4;
+    width: 99%;
+    text-align: center;
+    margin: auto;
+    top: 7px;
+}
+#em_table{
     position: relative;
     border: 2px solid #03a9f4;
     width: 99%;
@@ -117,7 +160,7 @@
 .modal {
     display: none; /* 默认隐藏 */
     position: absolute;
-    z-index: 1;
+    z-index: 10;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -128,8 +171,44 @@
     width: 300px;
     height: 380px;
     max-width: 600px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
-
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 9;
+    backdrop-filter: blur(10px);
+}
+.em_modal {
+    display: none; /* 默认隐藏 */
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    height: 380px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.em_modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 9;
+    backdrop-filter: blur(10px);
+}
 .close-button {
     color: #aaa;
     position: relative;
@@ -151,8 +230,34 @@
     cursor: pointer;
     text-decoration: underline;
 }
+.em_modify{
+    background-color: transparent;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
 @media print {
     #cs_table {
+        border-collapse: collapse;
+        width: 100%;
+        border: black;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #ddd;
+    }
+    tr td:nth-last-child(-n+3) {
+        display: none;
+    }
+    tr th:nth-last-child(1) {
+        display: none;
+    }
+    #em_table {
         border-collapse: collapse;
         width: 100%;
         border: black;
@@ -180,7 +285,24 @@
     height: 28px;
     border-radius: 20px;
 }
+#em_classify_outer{
+    position: absolute;
+    top: 70px;
+    left: 0px;
+    width: 210px;
+    height: 28px;
+    border-radius: 20px;
+}
 #cs_classify_inner{
+    position: absolute;
+    top: 74px;
+    left: 53px;
+    width: 120px;
+    height: 19px;
+    border: none;
+    z-index: 3;
+}
+#em_classify_inner{
     position: absolute;
     top: 74px;
     left: 53px;
@@ -203,6 +325,20 @@
     background-size: cover;
     cursor: pointer;
 }
+#em_classify_btn{
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    border: none;
+    position: absolute;
+    left: 180px;
+    top: 71px;
+    background-image: url("icon/button2.png");
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
 #cs_classify_select{
     position: absolute;
     top: 73px;
@@ -212,6 +348,50 @@
     border-radius: 12px;
     border: none;
     z-index: 2;
+}
+#em_classify_select{
+    position: absolute;
+    top: 73px;
+    left: 2px;
+    width: 50px;
+    height: 22px;
+    border-radius: 12px;
+    border: none;
+    z-index: 2;
+}
+.refresh-button {
+    display: inline-block;
+    position: absolute;
+    top: 108px;
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    background-image: url("icon/refresh.png");
+    background-size: cover;
+    cursor: pointer;
+    border: none;
+}
+.cs_btn{
+    background-color: #03a9f4;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 7px 14px;
+}
+.cs_btn:hover{
+    background-color: #45CBFF;
+}
+.em_btn{
+    background-color: #03a9f4;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 7px 14px;
+}
+.em_btn:hover{
+    background-color: #45CBFF;
 }
 /*调整页面亮度*/
 /*body {*/

@@ -107,6 +107,20 @@
     border: 2px solid #45CBFF;
     cursor: pointer;
 }
+#io_cs_table{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: -69px;
+    margin-top: 105px;
+    background-color: #45CBFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+#io_cs_table:active{
+    background-color: #03a9f4;
+}
 #print_em_table{
     position: relative;
     display: inline-block;
@@ -172,6 +186,60 @@
     height: 380px;
     max-width: 600px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.out_cs {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
+    height: 300px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+#select-all{
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+#select-all-label {
+    cursor: pointer;
+}
+.ck_out_cs{
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+.out_file_kind{
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    transition: all 0.3s; /* 添加过渡效果 */
+}
+#out_cs_btn{
+    position: absolute;
+    right: 70px;
+    bottom: 20px;
+    background-color: #45CBFF;
+    cursor: pointer;
+    border: 2px solid #45CBFF;;
+    border-radius: 3px;
+    color: white;
+}
+#out_cs_btn_back{
+    position: absolute;
+    right: 15px;
+    bottom: 20px;
+    border-radius: 3px;
+    border-color: #cccccc;
+    cursor: pointer;
 }
 .modal-overlay {
     position: fixed;
@@ -362,8 +430,8 @@
 .refresh-button {
     display: inline-block;
     position: absolute;
-    top: 108px;
-    right: 30px;
+    top: 99px;
+    right: 50px;
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -392,6 +460,102 @@
 }
 .em_btn:hover{
     background-color: #45CBFF;
+}
+.IO_div{
+    position: fixed;
+    width: 50px;
+    height:50px;
+    z-index: 20;
+    background-color: #f441a5;
+    right: 30px;
+    margin-top: 137px;
+}
+.I_div{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height:50%;
+    z-index: 21;
+    background-color: #45CBFF;
+    color: white;
+    font-weight: normal;
+    cursor: pointer;
+}
+.I_div:hover{
+    background-color: #03a9f4;
+}
+.O_div{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height:50%;
+    z-index: 21;
+    background-color: #45CBFF;
+    color: white;
+    font-weight: normal;
+    cursor: pointer;
+}
+.O_div:hover{
+    background-color: #03a9f4;
+}
+.file_button{
+    width: 100%;
+    height:50%;
+    z-index: 22;
+    background-color: #45CBFF;
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+}
+.file_button:hover{
+    background-color: #03a9f4;
+}
+
+.importCsDiv{
+    display: none;
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    height: 200px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.file_name{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: not-allowed;
+    width: 150px
+}
+#importCsSubmit{
+    background-color: #45CBFF;
+    cursor: pointer;
+    border: 2px solid #45CBFF;;
+    border-radius: 3px;
+    color: white;
+    position: absolute;
+    bottom: 60px;
+    right: 75px;
+}
+#importCsSubmit:hover{
+    background-color: #03a9f4;
+}
+#notImportCsSubmit{
+    border-radius: 3px;
+    border-color: #cccccc;
+    position: absolute;
+    bottom: 60px;
+    right: 25px;
+    cursor: pointer;
 }
 /*调整页面亮度*/
 /*body {*/

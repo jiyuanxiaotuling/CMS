@@ -11,48 +11,29 @@ import db.DB;
 public class addCsServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        request.setCharacterEncoding("gb2312");
-        response.setContentType("text/html;charset=gb2312");
-
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        String id = request.getParameter("Cs_id");
+        String name = request.getParameter("Cs_name");
+        String sex=request.getParameter("Cs_sex");
+        String phone=request.getParameter("Cs_phone");
+        String email=request.getParameter("Cs_email");
+        String address=request.getParameter("Cs_address");
+        String kind=request.getParameter("Cs_kind");
+        String remark=request.getParameter("Cs_remark");
+        CS cs=new CS();
+        cs.setCs_id(id);
+        cs.setCs_name(name);
+        cs.setCs_sex(sex);
+        cs.setCs_phone(phone);
+        cs.setCs_email(email);
+        cs.setCs_address(address);
+        cs.setCs_kind(kind);
+        cs.setCs_remark(remark);
         if(request.getParameter("Cs_btn").equals("提交")){
-            String id = request.getParameter("Cs_id");
-            String name = request.getParameter("Cs_name");
-            String sex=request.getParameter("Cs_sex");
-            String phone=request.getParameter("Cs_phone");
-            String email=request.getParameter("Cs_email");
-            String address=request.getParameter("Cs_address");
-            String kind=request.getParameter("Cs_kind");
-            String remark=request.getParameter("Cs_remark");
-            CS cs=new CS();
-            cs.setCs_id(id);
-            cs.setCs_name(name);
-            cs.setCs_sex(sex);
-            cs.setCs_phone(phone);
-            cs.setCs_email(email);
-            cs.setCs_address(address);
-            cs.setCs_kind(kind);
-            cs.setCs_remark(remark);
             new DB().addCs(cs);
             response.sendRedirect("main.jsp");
         } else if (request.getParameter("Cs_btn").equals("修改")) {
-            String id = request.getParameter("Cs_id");
-            String name = request.getParameter("Cs_name");
-            String sex=request.getParameter("Cs_sex");
-            String phone=request.getParameter("Cs_phone");
-            String email=request.getParameter("Cs_email");
-            String address=request.getParameter("Cs_address");
-            String kind=request.getParameter("Cs_kind");
-            String remark=request.getParameter("Cs_remark");
-            CS cs=new CS();
-            cs.setCs_id(id);
-            cs.setCs_name(name);
-            cs.setCs_sex(sex);
-            cs.setCs_phone(phone);
-            cs.setCs_email(email);
-            cs.setCs_address(address);
-            cs.setCs_kind(kind);
-            cs.setCs_remark(remark);
             new DB().modifyCs(cs);
             response.sendRedirect("main.jsp");
         }

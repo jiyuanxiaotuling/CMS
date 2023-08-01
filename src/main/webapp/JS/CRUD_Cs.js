@@ -49,7 +49,7 @@ function closeEmModal() {
     document.getElementById("em_modal").style.display = "none";
     document.getElementById("em_submit_btn").style.display = "none";
     document.getElementById("em_modify_btn").style.display = "none";
-    let overlay = document.querySelector(".em_modal-overlay");
+    let overlay = document.querySelector(".modal-overlay");
     document.body.removeChild(overlay);
     document.body.classList.add("modal-open");
 }
@@ -267,3 +267,114 @@ window.onload = function() {
 window.onunload = function() {
     saveDivStates();
 };
+function io_cs_table(event){
+    event.stopPropagation(); // 防止事件冒泡
+    var btn = document.getElementById("io_cs_table");
+    if(btn.style.backgroundColor === "rgb(17, 116, 167)"){
+        btn.style.backgroundColor = "rgb(69, 203, 255)";
+    }else
+    {
+        btn.style.backgroundColor = "rgb(17, 116, 167)";
+    }
+    var io_div=document.getElementById("IO_div");
+    if(io_div.style.display === "none"){
+        io_div.style.display = "block";
+    }else{
+        io_div.style.display = "none";
+    }
+}
+// 展示隐藏的导出页面
+function show_out_cs(event)
+{
+    event.stopPropagation(); // 防止事件冒泡
+    var out_cs = document.getElementById("out_cs");
+    out_cs.style.display = "block";
+    document.getElementById("IO_div").style.display = "none";
+    document.getElementById("io_cs_table").style.backgroundColor = "rgb(69, 203, 255)"
+    let overlay = document.createElement("div");
+    overlay.className = "modal-overlay";
+    document.body.appendChild(overlay);
+    document.body.classList.add("modal-open");
+
+}
+function close_out_cs(){
+    document.getElementById("out_cs").style.display = "none";
+    let overlay = document.querySelector(".modal-overlay");
+    document.body.removeChild(overlay);
+    document.body.classList.add("modal-open");
+}
+
+function out_cs(){
+    const checkboxs = document.querySelectorAll(".ck_out_cs");
+    const selectedFields = [];
+    checkboxs.forEach(function (checkbox){
+        if(checkbox.checked){
+            const label = checkbox.nextElementSibling;
+            selectedFields.push(label.textContent);
+        }
+    })
+
+    const table = document.getElementById('cs_table');
+    const workbook = XLSX.utils.table_to_book(table, {raw: true, harder: 1});
+    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+
+// Convert the worksheet to JSON
+    let data = XLSX.utils.sheet_to_json(worksheet, {header: 1,range: 0});
+
+// Filter the data to only include selected fields
+    data = data.map(row => row.filter((_, index) => selectedFields.includes(data[0][index])));
+
+// Create a new workbook and worksheet with the filtered data
+    const newWorkbook = XLSX.utils.book_new();
+    const newWorksheet = XLSX.utils.json_to_sheet(data);
+
+// Append the worksheet to the workbook
+    XLSX.utils.book_append_sheet(newWorkbook, newWorksheet, "Sheet1");
+
+// Write the workbook to a file
+    const outputType = document.querySelector('input[name="out_file_kind"]:checked').id;
+    if (outputType === 'csv') {
+        const csv = XLSX.utils.sheet_to_csv(newWorksheet);
+        const bom = new Uint8Array([0xEF, 0xBB, 0xBF]); // 添加 BOM 标记
+        const blob = new Blob([bom, csv], { type: 'text/csv;charset=utf-8;' });
+        const filename = '客户信息.csv';
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, filename);
+        } else {
+            const link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                const url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", filename);
+                link.style.visibility = "hidden";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    } else {
+        XLSX.writeFile(newWorkbook, '客户信息.xlsx');
+    }
+
+    document.getElementById("out_cs").style.display = "none";
+    let overlay = document.querySelector(".modal-overlay");
+    document.body.removeChild(overlay);
+    document.body.classList.add("modal-open");
+// 将工作表添加到工作簿中，并将工作簿导出为 Excel 文件
+}
+function show_importCs(){
+    var importCs = document.getElementById("importCsDiv");
+    importCs.style.display = "block";
+    let overlay = document.createElement("div");
+    overlay.className = "modal-overlay";
+    document.body.appendChild(overlay);
+    document.body.classList.add("modal-open");
+}
+function close_importCs(){
+    var importCs = document.getElementById("importCsDiv");
+    importCs.style.display = "none";
+    let overlay = document.querySelector(".modal-overlay");
+    document.body.removeChild(overlay);
+    document.body.classList.add("modal-open");
+}

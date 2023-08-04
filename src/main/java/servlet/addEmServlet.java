@@ -35,7 +35,6 @@ public class addEmServlet extends HttpServlet {
             new DB().addEm(em);
             response.sendRedirect("main.jsp");
         } else if (request.getParameter("em_btn").equals("修改")) {
-
             new DB().modifyEm(em);
             response.sendRedirect("main.jsp");
         }

@@ -35,21 +35,19 @@ public class DB {
     public User checkUser(String username,String password){
         try{
             pstmt=ct.prepareStatement("select * from account where acc_username=? and acc_password=?");
-
             pstmt.setString(1,username);
-            pstmt.setString(2, password);
+            pstmt.setString(2,password);
             ResultSet rs=pstmt.executeQuery();
-            User user=new User();
+
             if(!rs.next()){
                 return null;
-            }
-            while(rs.next()){
+            }else{
+                User user=new User();
                 user.setId(rs.getInt(1));
                 user.setUsername(rs.getString(2));
                 user.setPassword(rs.getString(3));
                 return user;
             }
-            return null;
         }catch(Exception e){
             e.printStackTrace();
             return null;
@@ -70,16 +68,16 @@ public class DB {
         }
         return false;
     }
-    public String getUserName(int id)  {
-        String username=null;
+    public String getEmId(String username)  {
+        String emid = null;
         try {
-            pstmt=ct.prepareStatement("select acc_username from account where acc_id=?");
-            pstmt.setInt(1, id);
+            pstmt=ct.prepareStatement("select em_id from account where acc_username=?");
+            pstmt.setString(1, username);
             ResultSet rs=pstmt.executeQuery();
             while(rs.next())  {
-                username=rs.getString(1);
+                emid = rs.getString(1);
             }
-            return username;
+            return emid;
         } catch(Exception e)  {
             e.printStackTrace();
             return null;
@@ -114,6 +112,31 @@ public class DB {
             pstmt=ct.prepareStatement("select * from employee");
             ArrayList al=new ArrayList();
             ResultSet rs=pstmt.executeQuery();
+            while(rs.next()){
+                EM em_info=new EM();
+                em_info.setEm_id(rs.getString(1));
+                em_info.setEm_name(rs.getString(2));
+                em_info.setEm_gender(rs.getString(3));
+                em_info.setEm_age(rs.getInt(4));
+                em_info.setEm_position(rs.getString(5));
+                em_info.setEm_department(rs.getString(6));
+                em_info.setEm_phone(rs.getString(7));
+                em_info.setEm_email(rs.getString(8));
+                al.add(em_info);
+            }
+            return al;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+//    通过员工ID来查找信息，用于再个人信息中显示
+    public ArrayList findEmInfoById(String id){
+        try{
+            pstmt=ct.prepareStatement("select * from employee where em_id=?");
+            pstmt.setString(1,id);
+            ResultSet rs=pstmt.executeQuery();
+            ArrayList al=new ArrayList();
             while(rs.next()){
                 EM em_info=new EM();
                 em_info.setEm_id(rs.getString(1));
@@ -262,6 +285,32 @@ public class DB {
             e.printStackTrace();
             return false;
         }
+    }
+    public boolean modifyEmPwd(String pwd,String id){
+        try{
+            pstmt=ct.prepareStatement("UPDATE account SET acc_password=? WHERE em_id=?");
+            pstmt.setString(1, pwd);
+            pstmt.setString(2, id);
+            pstmt.executeUpdate();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public String findEmPwd(String id){
+        try{
+            pstmt=ct.prepareStatement("SELECT acc_password from account WHERE em_id=?");
+            pstmt.setString(1, id);
+            ResultSet rs=pstmt.executeQuery();
+            if(rs.next()) {
+                return rs.getString(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        return null;
     }
 //    删除用户
     public boolean deleteCs(String id){

@@ -17,6 +17,8 @@ public class adminServlet extends HttpServlet {
         String username = request.getParameter("username");
         String pwd = request.getParameter("password");
         if(username.equals("admin")&&pwd.equals("guest")){
+            HttpSession session=request.getSession();
+            session.setAttribute("userRole","admin");
             response.sendRedirect("main.jsp");
         }else if(!(new DB().isExistName(username))){
             response.setContentType("text/html; charset=UTF-8");
@@ -27,7 +29,11 @@ public class adminServlet extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             response.getWriter().print("<script language='javascript'>alert('密码错误！');window.document.location.href=\"login.jsp\";</script>");
         }else{
-            response.sendRedirect("employee.jsp");
+            HttpSession session=request.getSession();
+            String emid = new DB().getEmId(username);
+            session.setAttribute("userRole","employee");
+            session.setAttribute("emId",emid);
+            response.sendRedirect("main.jsp");
         }
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response)

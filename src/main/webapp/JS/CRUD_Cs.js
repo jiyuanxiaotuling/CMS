@@ -290,7 +290,7 @@ function show_out_cs(event)
     var out_cs = document.getElementById("out_cs");
     out_cs.style.display = "block";
     document.getElementById("IO_div").style.display = "none";
-    document.getElementById("io_cs_table").style.backgroundColor = "rgb(69, 203, 255)"
+    document.getElementById("io_cs_table").style.backgroundColor = "rgb(69, 203, 255)";
     let overlay = document.createElement("div");
     overlay.className = "modal-overlay";
     document.body.appendChild(overlay);
@@ -364,8 +364,11 @@ function out_cs(){
 // 将工作表添加到工作簿中，并将工作簿导出为 Excel 文件
 }
 function show_importCs(){
+    event.stopPropagation(); // 防止事件冒泡
     var importCs = document.getElementById("importCsDiv");
     importCs.style.display = "block";
+    document.getElementById("IO_div").style.display = "none";
+    document.getElementById("io_cs_table").style.backgroundColor = "rgb(69, 203, 255)";
     let overlay = document.createElement("div");
     overlay.className = "modal-overlay";
     document.body.appendChild(overlay);

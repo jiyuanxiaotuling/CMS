@@ -93,5 +93,13 @@
         <servlet-name>ImportCustomerServlet</servlet-name>
         <url-pattern>/ImportCustomerServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>modifyEmPwdServlet</servlet-name>
+        <servlet-class>servlet.modifyEmPwdServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modifyEmPwdServlet</servlet-name>
+        <url-pattern>/modifyEmPwdServlet</url-pattern>
+    </servlet-mapping>
 
 </web-app>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calendar</title>
+    <style>
+        .calendar {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 400px;
+        }
+        .calendar .day {
+            width: 14.28%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+        }
+        .calendar .today {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+<h1>Calendar</h1>
+<div id="calendar" class="calendar"></div>
+
+<script>
+    // 获取当前日期
+    var currentDate = new Date();
+
+    // 构建日历
+    function buildCalendar(date) {
+        var year = date.getFullYear();
+        var month = date.getMonth();
+        var daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        var calendarDiv = document.getElementById('calendar');
+        calendarDiv.innerHTML = '';
+
+        // 创建日期格子
+        for (var i = 1; i <= daysInMonth; i++) {
+            var dayDiv = document.createElement('div');
+            dayDiv.classList.add('day');
+            dayDiv.innerText = i;
+
+            // 设置当前日期样式
+            if (i === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear()) {
+                dayDiv.classList.add('today');
+            }
+
+            calendarDiv.appendChild(dayDiv);
+        }
+    }
+
+    // 初始化日历
+    buildCalendar(currentDate);
+</script>
+</body>
+</html>

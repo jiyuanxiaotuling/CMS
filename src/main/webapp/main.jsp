@@ -37,7 +37,7 @@
                 <div class="person_info" onclick="showPersonInfo()">
 
                 </div>
-                <div class="richeng">
+                <div class="richeng" onclick="showricheng()">
 
                 </div>
                 <div class="tongzhi">
@@ -59,7 +59,7 @@
                 <p class="left-title-word">市场活动</p>
             </div>
             <div class="left-title" onclick="showContent(5)">
-                <p class="left-title-word">数据管理</p>
+                <p class="left-title-word">备份恢复</p>
             </div>
             <%
                 String userRole = (String) session.getAttribute("userRole");
@@ -100,6 +100,7 @@
                         <option value="cs_address">地址</option>
                         <option value="cs_kind">类别</option>
                     </select>
+                    <input type="button" value="删除选中" class="deleteChecked" id="deleteCheckedCs" onclick="DeleteAllCs()">
                     <input id="cs_classify_outer" readonly>
                     <input id="cs_classify_inner" >
                     <input id="cs_classify_btn" type="submit" value="" onclick="classifyCs()">
@@ -187,13 +188,14 @@
                     <input type="button" id="out_cs_btn" value="导出" onclick="out_cs()">
                     <input type="button" id="out_cs_btn_back" value="取消" onclick="close_out_cs()">
                 </div>
-                <script charset="utf-8"  src="JS/out_cs_select_all.js?v=<%= System.currentTimeMillis() %>"></script>
-                <script charset="utf-8"  src="JS/out_cs_xls.js?v=<%= System.currentTimeMillis() %>"></script>
+                <script charset="utf-8"  src="JS/exportSelectAll.js?v=<%= System.currentTimeMillis() %>"></script>
+                <script charset="utf-8"  src="JS/exportCs.js?v=<%= System.currentTimeMillis() %>"></script>
 
                 <%--    用户表格存放容器--%>
                 <div id="cs_table_container">
                     <table id="cs_table">
                         <tr style="background-color: cornflowerblue">
+                            <th><input type="checkbox" id="select_all_cs" onclick="selectAllCs()"></th>
                             <th>ID</th>
                             <th>姓名</th>
                             <th width="50">性别</th>
@@ -219,6 +221,7 @@
                                 cs_i++;
                         %>
                         <tr>
+                            <td><input type="checkbox" name="row-checkbox-cs" class="row-checkbox-cs" onchange="showCsBtn()"></td>
                             <td><%= cs.getCs_id()%></td>
                             <td><%= cs.getCs_name() %></td>
                             <td><%= cs.getCs_sex() %></td>
@@ -235,6 +238,7 @@
                             }
                             %>
                     </table>
+                    <script charset="utf-8"  src="JS/selectCs.js?v=<%= System.currentTimeMillis() %>"></script>
                 </div>
             </div>
             <div id="content3" style="display: none" class="main_content">
@@ -299,6 +303,7 @@
                     <div id="em_table_container">
                         <table id="em_table">
                             <tr style="background-color: cornflowerblue">
+                                <th><input type="checkbox" id="select_all_em" onclick="selectAllEm()"></th>
                                 <th>ID</th>
                                 <th>姓名</th>
                                 <th width="50">性别</th>
@@ -324,6 +329,7 @@
                                     em_i++;
                             %>
                             <tr>
+                                <td><input type="checkbox" name="row-checkbox-em" class="row-checkbox-em"></td>
                                 <td><%= em.getEm_id()%></td>
                                 <td><%= em.getEm_name() %></td>
                                 <td><%= em.getEm_gender() %></td>
@@ -342,7 +348,6 @@
                         </table>
                     </div>
                 </div>
-
         </div>
     </body>
 </html>

@@ -19,7 +19,6 @@ public class deleteEmServlet extends HttpServlet {
             new DB().deleteEm(id);
             response.sendRedirect("main.jsp");
         }
-
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

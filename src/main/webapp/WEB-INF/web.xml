@@ -101,5 +101,20 @@
         <servlet-name>modifyEmPwdServlet</servlet-name>
         <url-pattern>/modifyEmPwdServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>deleteCheckedCsServlet</servlet-name>
+        <servlet-class>servlet.deleteCheckedCsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteCheckedCsServlet</servlet-name>
+        <url-pattern>/deleteCheckedCsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>getDateServlet</servlet-name>
+        <servlet-class>servlet.getDateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getDateServlet</servlet-name>
+        <url-pattern>/getDateServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

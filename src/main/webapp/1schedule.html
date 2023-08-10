@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/schedule.css">
+    <title>Calendar</title>
+</head>
+<body>
+    <div class="top-container">
+        <h2 class="head-title">客户资源管理系统</h2>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <br>
+            <label for="ac_id">&nbsp;I&nbsp;D：&nbsp;</label>
+            <input type="text" id="ac_id" name="ac_id"><br><br>
+
+            <label for="ac_name">活动名称：</label>
+            <input type="text" id="ac_name" name="ac_name"><br><br>
+
+            <label for="ac_kind">活动类别：</label>
+            <input type="text" id="ac_kind" name="ac_kind"><br><br>
+
+            <label for="ac_content">具体描述：</label>
+            <textarea id="ac_content" name="ac_content"></textarea><br><br>
+
+            <label for="ac_address">地址：</label>
+            <input type="text" id="ac_address" name="ac_address"><br><br>
+
+            <label for="ac_btime">开始时间：</label>
+            <input type="text" id="ac_btime" name="ac_btime"><br><br>
+
+            <label for="ac_etime">开始时间：</label>
+            <input type="text" id="ac_etime" name="ac_etime"><br><br>
+        </div>
+    </div>
+    <div id="calendar">
+        <div class="header">
+            <div class="btn-group">
+                <button class="left"><</button>
+                <button class="right">></button>
+            </div>
+            <h3 id="title"></h3>
+            <button class="skipToToday">跳至今天</button>
+        </div>
+        <div class="week">
+            <li>日</li>
+            <li>一</li>
+            <li>二</li>
+            <li>三</li>
+            <li>四</li>
+            <li>五</li>
+            <li>六</li>
+        </div>
+        <div id="content">
+        </div>
+    </div>
+    <script src="JS/schedule.js"></script>
+    <script src="JS/schedule2.js"></script>
+</body>
+</html>

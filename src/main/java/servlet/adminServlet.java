@@ -18,7 +18,9 @@ public class adminServlet extends HttpServlet {
         String pwd = request.getParameter("password");
         if(username.equals("admin")&&pwd.equals("guest")){
             HttpSession session=request.getSession();
+            String emid = new DB().getEmId(username);
             session.setAttribute("userRole","admin");
+            session.setAttribute("emId",emid);
             response.sendRedirect("main.jsp");
         }else if(!(new DB().isExistName(username))){
             response.setContentType("text/html; charset=UTF-8");

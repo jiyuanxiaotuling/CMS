@@ -67,12 +67,12 @@
 .em_menu{
     background-color: #c7d9eb;
     position: relative;
-    top: 5px;
+    top: 1px;
     margin: auto;
     width: 99%;
     height: 150px;
-    border: 3px solid #45CBFF;
     border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 #add_cs{
     position: relative;
@@ -135,11 +135,11 @@
 #cs_table_container{
     position: relative;
     background-color: #c7d9eb;
-    top: 20px;
+    top: 15px;
     margin: auto;
     width: 99%;
-    height: 550px;
-    border: 3px solid #45CBFF;
+    height: 575px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     overflow: auto;
 }
@@ -150,18 +150,23 @@
     top: 20px;
     margin: auto;
     width: 99%;
-    height: 550px;
-    border: 3px solid #45CBFF;
+    height: 575px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     overflow: auto;
 }
 #cs_table{
     position: relative;
     border: 2px solid #03a9f4;
-    width: 99%;
+    width: 98%;
     text-align: center;
+    border-radius: 10px;
     margin: auto;
-    top: 7px;
+    top: 13px;
+
+}
+td,th {
+    border-radius: 6px; /* 设置圆角半径 */
 }
 #em_table{
     position: relative;
@@ -169,7 +174,8 @@
     width: 99%;
     text-align: center;
     margin: auto;
-    top: 7px;
+    border-radius: 10px;
+    top: 13px;
 }
 .modal {
     display: none; /* 默认隐藏 */
@@ -323,6 +329,14 @@
         display: none;
     }
     tr th:nth-last-child(1) {
+        display: none;
+    }
+    #cs_table td:nth-child(1),
+    #cs_table th:nth-child(1) {
+        display: none;
+    }
+    #em_table td:nth-child(1),
+    #em_table th:nth-child(1) {
         display: none;
     }
     #em_table {
@@ -651,11 +665,25 @@
 .tongzhi:hover::after{
     opacity: 1;
 }
-/*调整页面亮度*/
-/*body {*/
-/*    filter: brightness(1); !* 默认亮度 *!*/
-/*    transition: filter 0.5s ease-in-out; !* 添加过渡效果 *!*/
-/*}*/
-/*body.modal-open {*/
-/*    filter: brightness(0.5);*/
-/*}*/
+#select_all_cs{
+    cursor: pointer;
+}
+.row-checkbox-cs{
+    cursor: pointer;
+}
+#select_all_em{
+    cursor: pointer;
+}
+.row-checkbox-em{
+    cursor: pointer;
+}
+.deleteChecked{
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    background-color: #45CBFF;
+    color: white;
+    border: #45CBFF;
+    cursor: pointer;
+    display: none;
+}

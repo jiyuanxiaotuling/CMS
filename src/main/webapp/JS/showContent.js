@@ -18,5 +18,4 @@ function showcontent(id){
         document.getElementById("new_pwd").value = "";
         document.getElementById("new_pwd2").value = "";
     }
-
 }

@@ -212,6 +212,31 @@ public class DB {
             return null;
         }
     }
+    public ArrayList<AC> findDate(String emid){
+        try{
+            pstmt = ct.prepareStatement("select * from activity where ac_id = (select ac_id from employee where em_id = ?);");
+            pstmt.setString(1,emid);
+            ArrayList<AC> ac_info = new ArrayList<>();
+            ResultSet rs=pstmt.executeQuery();
+            while(rs.next()){
+                AC ac=new AC();
+                ac.setAc_id(rs.getString(1));
+                ac.setAc_name(rs.getString(2));
+                ac.setAc_kind(rs.getString(3));
+                ac.setAc_content(rs.getString(4));
+                ac.setAc_address(rs.getString(5));
+                ac.setAc_btime(rs.getDate(6));
+                ac.setAc_etime(rs.getDate(7));
+                ac.setAc_btime_specific(rs.getTimestamp(6));
+                ac.setAc_etime_specific(rs.getTimestamp(7));
+                ac_info.add(ac);
+            }
+            return ac_info;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 //   添加用户
     public boolean addCs(CS cs){
         try{

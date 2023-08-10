@@ -16,12 +16,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="CSS/PersonInfo.css?v=<%= System.currentTimeMillis() %>">
     <script charset="utf-8" src="JS/showContent.js?v=<%= System.currentTimeMillis() %>"></script>
+    <script charset="utf-8" src="JS/jump.js?v=<%= System.currentTimeMillis() %>"></script>
     <title>个人信息</title>
 </head>
 <body>
 <%
     String id = (String) session.getAttribute("emId");
-    System.out.println(id);
     ArrayList em_al=new DB().findEmInfoById(id);
     Iterator em_iter=em_al.iterator();
     EM em = (EM)em_iter.next();
@@ -44,6 +44,11 @@
         </div>
         <h4>修改密码</h4>
     </div>
+    <div id="content3" class="content" onclick="returnMain()">
+        <div id="returnIcon">
+        </div>
+        <h4>返回主页</h4>
+    </div>
 </div>
 <div class="right-container">
     <div id="forContent1">
@@ -53,7 +58,6 @@
             <div id="head_photo">
 
             </div>
-            <input type="button" id="change_photo" value="更换头像">
             <div class="form-group">
                 <label for="name">姓名：</label>
                 <input type="text" id="name" value="<%=em.getEm_name()%>" readonly>

@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="CSS/PersonInfo.css?v=<%= System.currentTimeMillis() %>">
     <script charset="utf-8" src="JS/showContent.js?v=<%= System.currentTimeMillis() %>"></script>
     <script charset="utf-8" src="JS/jump.js?v=<%= System.currentTimeMillis() %>"></script>
+    <script charset="utf-8" src="JS/PersonInfo.js?v=<%= System.currentTimeMillis() %>"></script>
     <title>个人信息</title>
 </head>
 <body>
@@ -53,7 +54,7 @@
 <div class="right-container">
     <div id="forContent1">
         <h3>个人信息</h3><br>
-        <form>
+        <form action="modifyPersonalInfoServlet" method="post">
             <p style="position:relative;left: 10px">头像</p>
             <div id="head_photo">
 
@@ -92,12 +93,13 @@
             </div>
             <div class="form-group">
                 <label for="phone">电话：</label>
-                <input type="text" id="phone" value="<%=em.getEm_phone()%>" readonly>
+                <input type="text" id="phone" name="em-phone" value="<%=em.getEm_phone()%>">
             </div>
             <div class="form-group">
                 <label for="email">邮箱：</label>
-                <input type="text" id="email" value="<%=em.getEm_email()%>" >
+                <input type="text" id="email" name="em-email" value="<%=em.getEm_email()%>" >
             </div>
+            <input type="hidden" name="hidden_emid" value="<%=id%>">
             <input type="submit" value="保存" class="remain">
         </form>
     </div>
@@ -119,6 +121,24 @@
             <input type="submit" value="保存" id="re_pwd">
         </form>
     </div>
+    <p id="success">修改成功！</p>
+    <p id="failed">修改失败，请检查格式是否正确！</p>
+    <script>
+        var modifyMessage = '<%= session.getAttribute("modifyMessage") %>';
+        if(modifyMessage === 'success'){
+            var successMessage = document.getElementById("success");
+            successMessage.style.display = "block";
+            setTimeout(function() {
+                successMessage.style.display = "none";
+            }, 3000);
+        }else if(modifyMessage === 'failed'){
+            var successMessage = document.getElementById("failed");
+            successMessage.style.display = "block";
+            setTimeout(function() {
+                successMessage.style.display = "none";
+            }, 3000);
+        }
+    </script>
 </div>
 </body>
 </html>

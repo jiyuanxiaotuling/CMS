@@ -21,6 +21,7 @@ public class addCsServlet extends HttpServlet {
         String address=request.getParameter("Cs_address");
         String kind=request.getParameter("Cs_kind");
         String remark=request.getParameter("Cs_remark");
+        Date addtime = new Date(System.currentTimeMillis());
         CS cs=new CS();
         cs.setCs_id(id);
         cs.setCs_name(name);
@@ -30,6 +31,7 @@ public class addCsServlet extends HttpServlet {
         cs.setCs_address(address);
         cs.setCs_kind(kind);
         cs.setCs_remark(remark);
+        cs.setCs_addtime(addtime);
         if(request.getParameter("Cs_btn").equals("提交")){
             new DB().addCs(cs);
             response.sendRedirect("main.jsp");

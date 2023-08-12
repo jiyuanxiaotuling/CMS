@@ -10,17 +10,22 @@
 <%@ page import="model.CS" %>
 <%@ page import="javax.lang.model.type.ArrayType" %>
 <%@ page import="model.EM" %>
+<%@ page import="model.SE" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <meta charset="UTF-8">
 <%--        此处用了强制加载CSS属性，全部完工后可以删除--%>
         <link rel="stylesheet" type="text/css" href="CSS/main.css?v=<%= System.currentTimeMillis() %>">
+        <link rel="stylesheet" type="text/css" href="CSS/service.css?v=<%= System.currentTimeMillis() %>">
         <script charset="utf-8" src="JS/showContent.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/CRUD_Cs.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/importCs.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/underPhoto.js?v=<%= System.currentTimeMillis() %>"></script>
         <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <title>客户资源管理</title>
     </head>
     <body>
@@ -75,9 +80,7 @@
         <%--右侧整个大容器--%>
         <div class="right-container" class="main_content">
         <%--    系统主页对应的右侧页面--%>
-            <div id="content1" style="display: block">
-
-            </div>
+            <div id="content1" style="display: block"></div>
         <!--      客户管理对应的右侧页面-->
             <div id="content2" style="display: none" class="main_content">
 <%--                导入导出div--%>
@@ -204,6 +207,7 @@
                             <th>地址</th>
                             <th>类别</th>
                             <th>描述</th>
+                            <th>添加时间</th>
                             <th colspan="3" >操作</th>
                         </tr>
                         <%
@@ -230,6 +234,7 @@
                             <td><%= cs.getCs_address() %></td>
                             <td><%= cs.getCs_kind() %></td>
                             <td><%= cs.getCs_remark() %></td>
+                            <td><%= cs.getCs_addtime() %></td>
                             <td width="25"><input type="button" value="修改" class="cs_modify" onclick="modify_cs(<%= cs_i%>)"></td>
                             <td width="25"><input type="button" value="删除" class="cs_modify" onclick="delete_cs(<%= cs_i%>)"></td>
                             <td width="25"><input type="button" value="打印" class="cs_modify" onclick="print_cs(<%= cs_i%>)"></td>
@@ -242,7 +247,120 @@
                 </div>
             </div>
             <div id="content3" style="display: none" class="main_content">
+                <div class="em_menu">
+                    <h3 style="display: inline-block">客户请求信息</h3>
+                    <select id="se_classify_select">
+                        <option value="se_id">ID</option>
+                        <option value="se_kind">类别</option>
+                        <option value="se_kind">优先级</option>
+                        <option value="se_status">处理状态</option>
+                        <option value="se_content">描述</option>
+                        <option value="se_feedback">回馈</option>
+                        <option value="se_satisfaction">满意度</option>
+                        <option value="cs_id">客户</option>
+                        <option value="em_id">负责人</option>
+                    </select>
+                    <input id="se_classify_outer" readonly>
+                    <input id="se_classify_inner" >
+                    <input id="se_classify_btn" type="submit" value="" onclick="classifySe()">
+                    <input class="refresh-button" type="button" onclick="se_refresh_page()">
+                    <input id="add_se" type="button" value="新增请求" onclick="add_se()">
+                    <input id="print_se_table" type="button" value="打印表格" onclick="print_se_table()">
+                </div>
+                <%--    添加客服管理按钮的相应div，默认隐藏--%>
+                <div id="se_modal" class="se_modal">
+                    <div class="modal-content">
+                        <span class="close-button" onclick="closeSeModal()">&times;</span>
+                        <form action="addSeServlet" method="post">
+                            <label for="se_id">&nbsp;I&nbsp;D：&nbsp;</label>
+                            <input type="text" id="se_id" name="se_id"><br><br>
+                            <label for="se_time">时间：</label>
+                            <input type="text" id="se_time" name="se_time"><br><br>
+                            <script>
+                                $(function() {
+                                    $( "#se_time" ).datepicker({
+                                        dateFormat: "yy-mm-dd"
+                                    });
+                                });
+                            </script>
+                            <label for="se_kind">类别：</label>
+                            <input type="text" id="se_kind" name="se_kind"><br><br>
 
+                            <label for="se_priority">优先级：</label>
+                            <input type="text" id="se_priority" name="se_priority"><br><br>
+
+                            <label for="se_status">状态：</label>
+                            <input type="text" id="se_status" name="se_status"><br><br>
+
+                            <label for="se_content">描述：</label>
+                            <textarea type="text" id="se_content" name="se_content"></textarea><br><br>
+
+                            <label for="se_feedback">客户反馈：</label>
+                            <input type="text" id="se_feedback" name="se_feedback"><br><br>
+
+                            <label for="se_satisfaction">满意度：</label>
+                            <input type="text" id="se_satisfaction" name="se_satisfaction"><br><br>
+                            <label for="cs_id1">客户：</label>
+                            <input type="text" id="cs_id1" name="cs_id1"><br><br>
+                            <label for="em_id1">客服：</label>
+                            <input type="text" id="em_id1" name="em_id1"><br><br>
+                            <button type="submit" class="se_btn" id="se_submit_btn" name="se_btn" value="提交" >提交</button>
+                            <button type="submit" class="se_btn" id="se_modify_btn" name="se_btn" value="修改" style="display: none;">修改</button>
+                        </form>
+                    </div>
+                </div>
+                <%--    用户表格存放容器--%>
+                <div id="se_table_container">
+                    <table id="se_table">
+                        <tr style="background-color: cornflowerblue">
+                            <th><input type="checkbox" id="select_all_se" onclick="selectAllSe()"></th>
+                            <th>ID</th>
+                            <th>时间</th>
+                            <th width="50">类别</th>
+                            <th width="50">优先级</th>
+                            <th>状态</th>
+                            <th>描述</th>
+                            <th>反馈</th>
+                            <th>满意度</th>
+                            <th>客户</th>
+                            <th>客服</th>
+                            <th colspan="3" >操作</th>
+                        </tr>
+                        <%
+                            ArrayList se_al1=new DB().findSeInfo();
+                            Iterator se_iter=se_al1.iterator();
+                            ArrayList se_al2;
+                            if(session.getAttribute("se_al") != null){
+                                se_al2 = (ArrayList) session.getAttribute("se_al");
+                                se_iter = se_al2.iterator();
+                            }
+                            //                          用来确定是哪一行的按钮
+                            int se_i = 0;
+                            while(se_iter.hasNext()){
+                                SE se=(SE)se_iter.next();
+                                se_i++;
+                        %>
+                        <tr>
+                            <td><input type="checkbox" name="row-checkbox-em" class="row-checkbox-em"></td>
+                            <td><%= se.getSe_id()%></td>
+                            <td><%= se.getSe_time() %></td>
+                            <td><%= se.getSe_kind() %></td>
+                            <td><%= se.getSe_priority() %></td>
+                            <td><%= se.getSe_status() %></td>
+                            <td><%= se.getSe_content() %></td>
+                            <td><%= se.getSe_feedback() %></td>
+                            <td><%= se.getSe_satisfaction() %></td>
+                            <td><%= se.getCs_id() %></td>
+                            <td><%= se.getEm_id() %></td>
+                            <td width="25"><input type="button" value="修改" class="cs_modify" onclick="modify_se(<%= se_i%>)"></td>
+                            <td width="25"><input type="button" value="删除" class="cs_modify" onclick="delete_se(<%= se_i%>)"></td>
+                            <td width="25"><input type="button" value="打印" class="cs_modify" onclick="print_se(<%= se_i%>)"></td>
+                        </tr>
+                        <%
+                            }
+                        %>
+                    </table>
+                </div>
             </div>
             <div id="content4" style="display: none" class="main_content">市场活动</div>
             <div id="content5" style="display: none" class="main_content">数据管理</div>
@@ -266,7 +384,7 @@
                         <input id="add_em" type="button" value="添加员工" onclick="add_em()">
                         <input id="print_em_table" type="button" value="打印表格" onclick="print_em_table()">
                     </div>
-                        <%--    添加员工按钮的相应div，默认隐藏--%>
+                    <%--    添加员工按钮的相应div，默认隐藏--%>
                     <div id="em_modal" class="em_modal">
                         <div class="modal-content">
                             <span class="close-button" onclick="closeEmModal()">&times;</span>
@@ -299,7 +417,7 @@
                             </form>
                         </div>
                     </div>
-                        <%--    用户表格存放容器--%>
+                    <%--    用户表格存放容器--%>
                     <div id="em_table_container">
                         <table id="em_table">
                             <tr style="background-color: cornflowerblue">
@@ -312,6 +430,7 @@
                                 <th>部门</th>
                                 <th>电话</th>
                                 <th>邮箱</th>
+                                <th>入职时间</th>
                                 <th colspan="3" >操作</th>
                             </tr>
                             <%
@@ -322,7 +441,7 @@
                                     em_al2 = (ArrayList) session.getAttribute("em_al");
                                     em_iter = em_al2.iterator();
                                 }
-//                          用来确定是哪一行的按钮
+    //                          用来确定是哪一行的按钮
                                 int em_i = 0;
                                 while(em_iter.hasNext()){
                                     EM em=(EM)em_iter.next();
@@ -338,6 +457,7 @@
                                 <td><%= em.getEm_department() %></td>
                                 <td><%= em.getEm_phone() %></td>
                                 <td><%= em.getEm_email() %></td>
+                                <td><%= em.getEm_addtime() %></td>
                                 <td width="25"><input type="button" value="修改" class="cs_modify" onclick="modify_em(<%= em_i%>)"></td>
                                 <td width="25"><input type="button" value="删除" class="cs_modify" onclick="delete_em(<%= em_i%>)"></td>
                                 <td width="25"><input type="button" value="打印" class="cs_modify" onclick="print_em(<%= em_i%>)"></td>
@@ -348,6 +468,6 @@
                         </table>
                     </div>
                 </div>
-        </div>
+            </div>
     </body>
 </html>

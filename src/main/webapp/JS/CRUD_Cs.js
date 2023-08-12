@@ -19,13 +19,15 @@ function add_cs() {
 }
 function add_em() {
     document.getElementById("em_id").value = null;
-    document.getElementById("em_name").value = null;
-    document.getElementById("em_gender").options[0].selected = true;
-    document.getElementById("em_age").value = null;
-    document.getElementById("em_position").value = null;
-    document.getElementById("em_department").value =null;
-    document.getElementById("em_phone").value = null;
-    document.getElementById("em_email").value = null;
+    document.getElementById("se_time").value = null;
+    document.getElementById("se_kind").value = null;
+    document.getElementById("se_priority").value = null;
+    document.getElementById("se_status").value = null;
+    document.getElementById("se_content").value =null;
+    document.getElementById("se_feedback").value = null;
+    document.getElementById("se_satisfaction").value = null;
+    document.getElementById("cs_id").value = null;
+    document.getElementById("em_id").value = null;
     document.getElementById("em_modal").style.display = "block";
     document.getElementById("em_submit_btn").style.display = "block";
     document.getElementById("em_modify_btn").style.display = "none";
@@ -36,7 +38,27 @@ function add_em() {
     // 禁用页面的滚动条
     document.body.classList.add("modal-open");
 }
-
+function add_se() {
+    document.getElementById("se_id").value = null;
+    document.getElementById("se_time").value = null;
+    document.getElementById("se_kind").value = null;
+    document.getElementById("se_priority").value = null;
+    document.getElementById("se_status").value = null;
+    document.getElementById("se_content").value =null;
+    document.getElementById("se_feedback").value = null;
+    document.getElementById("se_satisfaction").value = null;
+    document.getElementById("cs_id1").value = null;
+    document.getElementById("em_id1").value = null;
+    document.getElementById("se_modal").style.display = "block";
+    document.getElementById("se_submit_btn").style.display = "block";
+    document.getElementById("se_modify_btn").style.display = "none";
+    //添加背景灰度
+    let overlay = document.createElement("div");
+    overlay.className = "modal-overlay";
+    document.body.appendChild(overlay);
+    // 禁用页面的滚动条
+    document.body.classList.add("modal-open");
+}
 function closeModal() {
     document.getElementById("modal").style.display = "none";
     document.getElementById("cs_submit_btn").style.display = "none";
@@ -49,6 +71,14 @@ function closeEmModal() {
     document.getElementById("em_modal").style.display = "none";
     document.getElementById("em_submit_btn").style.display = "none";
     document.getElementById("em_modify_btn").style.display = "none";
+    let overlay = document.querySelector(".modal-overlay");
+    document.body.removeChild(overlay);
+    document.body.classList.add("modal-open");
+}
+function closeSeModal() {
+    document.getElementById("se_modal").style.display = "none";
+    document.getElementById("se_submit_btn").style.display = "none";
+    document.getElementById("se_modify_btn").style.display = "none";
     let overlay = document.querySelector(".modal-overlay");
     document.body.removeChild(overlay);
     document.body.classList.add("modal-open");
@@ -109,6 +139,27 @@ function modify_em(i){
     // 禁用页面的滚动条
     document.body.classList.add("modal-open");
 }
+function modify_se(i){
+    var t = document.getElementById("se_table");
+    document.getElementById("se_id").value = t.rows[i].cells[1].innerText;
+    document.getElementById("se_time").value = t.rows[i].cells[2].innerText;
+    document.getElementById("se_kind").value = t.rows[i].cells[3].innerText;
+    document.getElementById("se_priority").value = t.rows[i].cells[4].innerText;
+    document.getElementById("se_status").value = t.rows[i].cells[5].innerText;
+    document.getElementById("se_content").value = t.rows[i].cells[6].innerText;
+    document.getElementById("se_feedback").value = t.rows[i].cells[7].innerText;
+    document.getElementById("se_satisfaction").value = t.rows[i].cells[8].innerText;
+    document.getElementById("cs_id1").value = t.rows[i].cells[9].innerText;
+    document.getElementById("em_id1").value = t.rows[i].cells[10].innerText;
+    document.getElementById("se_modal").style.display = "block";
+    document.getElementById("se_submit_btn").style.display = "none";
+    document.getElementById("se_modify_btn").style.display = "block";
+    let overlay = document.createElement("div");
+    overlay.className = "modal-overlay";
+    document.body.appendChild(overlay);
+    // 禁用页面的滚动条
+    document.body.classList.add("modal-open");
+}
 function delete_cs(i){
     var t = document.getElementById("cs_table");
     var id = t.rows[i].cells[1].innerText;
@@ -125,6 +176,13 @@ function delete_em(i){
         window.location.href = "deleteEmServlet?action=delete&em_id=" + id;
     }
 }
+function delete_se(i){
+    var t = document.getElementById("se_table");
+    var cs_id = t.rows[i].cells[9].innerText;
+    if (confirm("确定要删除客户" + cs_id+ " 的请求吗？")) {
+        window.location.href = "deleteSeServlet?action=delete&cs_id=" + cs_id;
+    }
+}
 function print_cs_table(){
     var printContents = document.getElementById("cs_table").outerHTML;
     var originalContents = document.body.innerHTML;
@@ -134,6 +192,13 @@ function print_cs_table(){
 }
 function print_em_table(){
     var printContents = document.getElementById("em_table").outerHTML;
+    var originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+}
+function print_se_table(){
+    var printContents = document.getElementById("se_table").outerHTML;
     var originalContents = document.body.innerHTML;
     document.body.innerHTML = printContents;
     window.print();
@@ -151,8 +216,9 @@ function print_cs(i){
     rowData += '<tr><td>地址:</td><td>' + row.cells[6].innerText + '</td></tr>';
     rowData += '<tr><td>类别:</td><td>' + row.cells[7].innerText + '</td></tr>';
     rowData += '<tr><td>描述:</td><td>' + row.cells[8].innerText + '</td></tr>';
+    rowData += '<tr><td>添加时间:</td><td>' + row.cells[9].innerText + '</td></tr>';
     var printView = '<table>' + rowData + '</table>';
-    var printWindow = window.open('', '', 'height=500,width=800');
+    var printWindow = window.open('', '', 'height=1000,width=1600');
     printWindow.document.write('<html><head><title>打印表格</title></head><body>' + printView + '</body></html>');
     printWindow.document.close();
     printWindow.print();
@@ -171,7 +237,28 @@ function print_em(i){
     rowData += '<tr><td>电话:</td><td>' + row.cells[7].innerText + '</td></tr>';
     rowData += '<tr><td>邮箱:</td><td>' + row.cells[8].innerText + '</td></tr>';
     var printView = '<table>' + rowData + '</table>';
-    var printWindow = window.open('', '', 'height=500,width=800');
+    var printWindow = window.open('', '', 'height=1000,width=1600');
+    printWindow.document.write('<html><head><title>打印表格</title></head><body>' + printView + '</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+    printWindow.close();
+}
+function print_se(i){
+    var t = document.getElementById("se_table");
+    var row = t.rows[i];
+    var rowData = '';
+    rowData += '<tr><td>ID:</td><td>' + row.cells[1].innerText + '</td></tr>';
+    rowData += '<tr><td>时间:</td><td>' + row.cells[2].innerText + '</td></tr>';
+    rowData += '<tr><td>类型:</td><td>' + row.cells[3].innerText + '</td></tr>';
+    rowData += '<tr><td>优先级:</td><td>' + row.cells[4].innerText + '</td></tr>';
+    rowData += '<tr><td>状态:</td><td>' + row.cells[5].innerText + '</td></tr>';
+    rowData += '<tr><td>描述:</td><td>' + row.cells[6].innerText + '</td></tr>';
+    rowData += '<tr><td>反馈:</td><td>' + row.cells[7].innerText + '</td></tr>';
+    rowData += '<tr><td>满意度:</td><td>' + row.cells[8].innerText + '</td></tr>';
+    rowData += '<tr><td>客户:</td><td>' + row.cells[9].innerText + '</td></tr>';
+    rowData += '<tr><td>客服:</td><td>' + row.cells[10].innerText + '</td></tr>';
+    var printView = '<table>' + rowData + '</table>';
+    var printWindow = window.open('', '', 'height=1000,width=1600');
     printWindow.document.write('<html><head><title>打印表格</title></head><body>' + printView + '</body></html>');
     printWindow.document.close();
     printWindow.print();
@@ -207,6 +294,21 @@ function classifyEm(){
     xhr.send('branch=' + encodeURIComponent(branch) + '&keyword='  + encodeURIComponent(keyword));
     window.location.reload();
 }
+function classifySe(){
+    var xhr = new XMLHttpRequest();
+    var branch = document.getElementById("se_classify_select").value;
+    var keyword = document.getElementById("se_classify_inner").value;
+    xhr.open('POST', 'classifySeServlet', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            // 处理 Servlet 返回的数据
+            console.log(this.responseText);
+        }
+    };
+    xhr.send('branch=' + encodeURIComponent(branch) + '&keyword='  + encodeURIComponent(keyword));
+    window.location.reload();
+}
 function cs_refresh_page(){
     var xhr = new XMLHttpRequest();
     var branch = document.getElementById("cs_classify_select").value;
@@ -227,6 +329,21 @@ function em_refresh_page(){
     var branch = document.getElementById("em_classify_select").value;
     var keyword = document.getElementById("em_classify_inner").value;
     xhr.open('POST', 'classifyEmServlet', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            // 处理 Servlet 返回的数据
+            console.log(this.responseText);
+        }
+    };
+    xhr.send('branch=' + encodeURIComponent(branch) + '&keyword='  + encodeURIComponent(keyword));
+    window.location.reload();
+}
+function se_refresh_page(){
+    var xhr = new XMLHttpRequest();
+    var branch = document.getElementById("se_classify_select").value;
+    var keyword = document.getElementById("se_classify_inner").value;
+    xhr.open('POST', 'classifySeServlet', true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function() {
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {

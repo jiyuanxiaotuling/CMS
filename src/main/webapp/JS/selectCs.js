@@ -30,6 +30,19 @@ function selectAllEm() {
         checkbox.checked = isChecked;
     });
 }
+function selectAllSe() {
+    // 获取全选复选框的状态
+    var isChecked = document.getElementById("select_all_se").checked;
+
+    // 获取所有行的复选框
+    var checkboxes = document.getElementsByName("row-checkbox-se");
+
+
+    // 设置所有行复选框的状态与全选复选框一致
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = isChecked;
+    });
+}
 function showCsBtn(){
     var checkboxes = document.getElementsByName("row-checkbox-cs");
     var btn = document.getElementById("deleteCheckedCs");

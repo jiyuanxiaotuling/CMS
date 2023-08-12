@@ -194,3 +194,19 @@ label{
 #re_pwd:hover{
     background-color: #1F64CA;
 }
+#success{
+    position: relative;
+    display: none;
+    left: 300px;
+    top: -39px;
+    font-weight: bolder;
+    color: #23ce3d;
+}
+#failed{
+    position: absolute;
+    display: none;
+    left: 300px;
+    bottom: 125px;
+    font-weight: bolder;
+    color: red;
+}

@@ -1,6 +1,9 @@
 package model;
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class CS implements Serializable {
     private String cs_id;
     private String cs_name;
@@ -10,6 +13,14 @@ public class CS implements Serializable {
     private String cs_remark;
     private String cs_email;
     private String cs_sex;
+    private Date cs_addtime;
+
+    public Date getCs_addtime() {
+        return cs_addtime;
+    }
+    public void setCs_addtime(Date cs_addtime) {
+        this.cs_addtime = cs_addtime;
+    }
 
     public String getCs_sex() {
         return cs_sex;

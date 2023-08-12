@@ -2,10 +2,11 @@ package db;
 import java.net.URLEncoder;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.TimeZone;
 
 import model.*;
+
+import javax.servlet.http.HttpSession;
 
 public class DB {
     private static final Object UTC= TimeZone.getTimeZone("UTC");
@@ -99,7 +100,33 @@ public class DB {
                 cs_info.setCs_address(rs.getString(6));
                 cs_info.setCs_kind(rs.getString(7));
                 cs_info.setCs_remark(rs.getString(8));
+                cs_info.setCs_addtime(rs.getDate(9));
                 al.add(cs_info);
+            }
+            return al;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public ArrayList findSeInfo(){
+        try{
+            pstmt=ct.prepareStatement("select * from service");
+            ArrayList al = new ArrayList();
+            ResultSet rs=pstmt.executeQuery();
+            while(rs.next()){
+                SE se_info = new SE();
+                se_info.setSe_id(rs.getString(1));
+                se_info.setSe_time(rs.getDate(2));
+                se_info.setSe_kind(rs.getString(3));
+                se_info.setSe_priority(rs.getString(4));
+                se_info.setSe_status(rs.getString(5));
+                se_info.setSe_content(rs.getString(6));
+                se_info.setSe_feedback(rs.getString(7));
+                se_info.setSe_satisfaction(rs.getInt(8));
+                se_info.setCs_id(rs.getString(9));
+                se_info.setEm_id(rs.getString(10));
+                al.add(se_info);
             }
             return al;
         }catch(Exception e){
@@ -122,6 +149,7 @@ public class DB {
                 em_info.setEm_department(rs.getString(6));
                 em_info.setEm_phone(rs.getString(7));
                 em_info.setEm_email(rs.getString(8));
+                em_info.setEm_addtime(rs.getDate(10));
                 al.add(em_info);
             }
             return al;
@@ -147,6 +175,7 @@ public class DB {
                 em_info.setEm_department(rs.getString(6));
                 em_info.setEm_phone(rs.getString(7));
                 em_info.setEm_email(rs.getString(8));
+                em_info.setEm_addtime(rs.getDate(10));
                 al.add(em_info);
             }
             return al;
@@ -176,6 +205,7 @@ public class DB {
                 cs_info.setCs_address(rs.getString(6));
                 cs_info.setCs_kind(rs.getString(7));
                 cs_info.setCs_remark(rs.getString(8));
+                cs_info.setCs_addtime(rs.getDate(9));
                 al.add(cs_info);
             }
             return al;
@@ -204,9 +234,40 @@ public class DB {
                 em_info.setEm_department(rs.getString(6));
                 em_info.setEm_phone(rs.getString(7));
                 em_info.setEm_email(rs.getString(8));
+                em_info.setEm_addtime(rs.getDate(10));
                 em_al.add(em_info);
             }
             return em_al;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public ArrayList findSeInfo(String br,String key){
+        try{
+            if(key == null){
+                pstmt = ct.prepareStatement("select * from service");
+            }else{
+                pstmt=ct.prepareStatement("select * from service where "+ br +" like ?");
+                pstmt.setString(1,"%" + key + "%");
+            }
+            ArrayList se_al = new ArrayList();
+            ResultSet rs=pstmt.executeQuery();
+            while(rs.next()){
+                SE se_info = new SE();
+                se_info.setSe_id(rs.getString(1));
+                se_info.setSe_time(rs.getDate(2));
+                se_info.setSe_kind(rs.getString(3));
+                se_info.setSe_priority(rs.getString(4));
+                se_info.setSe_status(rs.getString(5));
+                se_info.setSe_content(rs.getString(6));
+                se_info.setSe_feedback(rs.getString(7));
+                se_info.setSe_satisfaction(rs.getInt(8));
+                se_info.setCs_id(rs.getString(9));
+                se_info.setEm_id(rs.getString(10));
+                se_al.add(se_info);
+            }
+            return se_al;
         }catch(Exception e){
             e.printStackTrace();
             return null;
@@ -240,7 +301,7 @@ public class DB {
 //   添加用户
     public boolean addCs(CS cs){
         try{
-            pstmt=ct.prepareStatement("insert into customer_info (cs_name,cs_sex,cs_phone,cs_email,cs_address,cs_kind,cs_remark,cs_id) values(?,?,?,?,?,?,?,?)");
+            pstmt=ct.prepareStatement("insert into customer_info (cs_name,cs_sex,cs_phone,cs_email,cs_address,cs_kind,cs_remark,cs_id,cs_addtime) values(?,?,?,?,?,?,?,?,?)");
             pstmt.setString(1, cs.getCs_name());
             pstmt.setString(2, cs.getCs_sex());
             pstmt.setString(3, cs.getCs_phone());
@@ -249,6 +310,7 @@ public class DB {
             pstmt.setString(6, cs.getCs_kind());
             pstmt.setString(7, cs.getCs_remark());
             pstmt.setString(8, cs.getCs_id());
+            pstmt.setDate(9, (Date) cs.getCs_addtime());
             pstmt.executeUpdate();
             return true;
         }catch(Exception e){
@@ -258,7 +320,7 @@ public class DB {
     }
     public boolean addEm(EM em){
         try{
-            pstmt=ct.prepareStatement("insert into employee (em_id,em_name,em_gender,em_age,em_position,em_department,em_phone,em_email) values(?,?,?,?,?,?,?,?)");
+            pstmt=ct.prepareStatement("insert into employee (em_id,em_name,em_gender,em_age,em_position,em_department,em_phone,em_email,em_addtime) values(?,?,?,?,?,?,?,?,?)");
             pstmt.setString(1, em.getEm_id());
             pstmt.setString(2, em.getEm_name());
             pstmt.setString(3, em.getEm_gender());
@@ -267,6 +329,27 @@ public class DB {
             pstmt.setString(6, em.getEm_department());
             pstmt.setString(7, em.getEm_phone());
             pstmt.setString(8, em.getEm_email());
+            pstmt.setDate(9, em.getEm_addtime());
+            pstmt.executeUpdate();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean addSe(SE se){
+        try{
+            pstmt=ct.prepareStatement("insert into service (se_id,se_time,se_kind,se_priority,se_status,se_content,se_feedback,se_satisfaction,cs_id,em_id) values(?,?,?,?,?,?,?,?,?,?)");
+            pstmt.setString(1, se.getSe_id());
+            pstmt.setDate(2, se.getSe_time());
+            pstmt.setString(3, se.getSe_kind());
+            pstmt.setString(4, se.getSe_priority());
+            pstmt.setString(5, se.getSe_status());
+            pstmt.setString(6, se.getSe_content());
+            pstmt.setString(7, se.getSe_feedback());
+            pstmt.setInt(8, se.getSe_satisfaction());
+            pstmt.setString(9, se.getCs_id());
+            pstmt.setString(10, se.getEm_id());
             pstmt.executeUpdate();
             return true;
         }catch(Exception e){
@@ -311,11 +394,43 @@ public class DB {
             return false;
         }
     }
+    public boolean modifySe(SE se){
+        try{
+            pstmt=ct.prepareStatement("UPDATE service SET se_time=?,se_kind=?,se_priority=?,se_status=?,se_content=?,se_feedback=?,se_satisfaction=?,em_id=? WHERE se_id=?");
+            pstmt.setDate(1, (Date) se.getSe_time());
+            pstmt.setString(2, se.getSe_kind());
+            pstmt.setString(3, se.getSe_priority());
+            pstmt.setString(4, se.getSe_status());
+            pstmt.setString(5, se.getSe_content());
+            pstmt.setString(6, se.getSe_feedback());
+            pstmt.setInt(7, se.getSe_satisfaction());
+            pstmt.setString(8, se.getEm_id());
+            pstmt.setString(9, se.getSe_id());
+            pstmt.executeUpdate();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
     public boolean modifyEmPwd(String pwd,String id){
         try{
             pstmt=ct.prepareStatement("UPDATE account SET acc_password=? WHERE em_id=?");
             pstmt.setString(1, pwd);
             pstmt.setString(2, id);
+            pstmt.executeUpdate();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean modifyEmInfo(String phone,String email,String id){
+        try{
+            pstmt=ct.prepareStatement("UPDATE employee SET em_phone=?,em_email=? WHERE em_id=?");
+            pstmt.setString(1, phone);
+            pstmt.setString(2, email);
+            pstmt.setString(3, id);
             pstmt.executeUpdate();
             return true;
         }catch(Exception e){
@@ -352,6 +467,17 @@ public class DB {
     public boolean deleteEm(String id){
         try{
             pstmt=ct.prepareStatement("DELETE from employee WHERE em_id=?");
+            pstmt.setString(1,id);
+            pstmt.executeUpdate();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean deleteSe(String id){
+        try{
+            pstmt=ct.prepareStatement("DELETE from service WHERE cs_id=?");
             pstmt.setString(1,id);
             pstmt.executeUpdate();
             return true;

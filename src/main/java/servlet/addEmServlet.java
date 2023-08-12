@@ -22,6 +22,7 @@ public class addEmServlet extends HttpServlet {
         String department=request.getParameter("em_department");
         String phone=request.getParameter("em_phone");
         String email=request.getParameter("em_email");
+        Date addtime = new Date(System.currentTimeMillis());
         EM em = new EM();
         em.setEm_id(id);
         em.setEm_name(name);
@@ -31,6 +32,7 @@ public class addEmServlet extends HttpServlet {
         em.setEm_department(department);
         em.setEm_phone(phone);
         em.setEm_email(email);
+        em.setEm_addtime(addtime);
         if(request.getParameter("em_btn").equals("提交")){
             new DB().addEm(em);
             response.sendRedirect("main.jsp");

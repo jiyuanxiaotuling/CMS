@@ -10,6 +10,14 @@ public class EM implements Serializable {
     private String em_department;
     private String em_phone;
     private String em_email;
+    private Date em_addtime;
+    public Date getEm_addtime() {
+        return em_addtime;
+    }
+
+    public void setEm_addtime(Date em_addtime) {
+        this.em_addtime = em_addtime;
+    }
 
     public String getEm_id() {
         return em_id;

@@ -117,4 +117,36 @@
         <servlet-name>getDateServlet</servlet-name>
         <url-pattern>/getDateServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>modifyPersonalInfoServlet</servlet-name>
+        <servlet-class>servlet.modifyPersonalInfoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modifyPersonalInfoServlet</servlet-name>
+        <url-pattern>/modifyPersonalInfoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>classifySeServlet</servlet-name>
+        <servlet-class>servlet.classifySeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>classifySeServlet</servlet-name>
+        <url-pattern>/classifySeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>addSeServlet</servlet-name>
+        <servlet-class>servlet.addSeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addSeServlet</servlet-name>
+        <url-pattern>/addSeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>deleteSeServlet</servlet-name>
+        <servlet-class>servlet.deleteSeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteSeServlet</servlet-name>
+        <url-pattern>/deleteSeServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

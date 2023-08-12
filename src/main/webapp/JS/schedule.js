@@ -1,6 +1,6 @@
 const calendarGrid = 42   // 7 * 6 grid
 let date = new Date()
-
+let overlay = null;
 // 传入一个整数，判断某一年是否为闰年
 function isLeap(year) {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
@@ -88,6 +88,7 @@ function generateCalendar(date) {
     )
     return calendarTable
 }
+
 // 渲染日历
 function renderCalendar(create = false) {
     const calendarData = generateCalendar(date)
@@ -123,9 +124,11 @@ function renderCalendar(create = false) {
                 selectDate(div)
                 if(item.year === parseInt(Year) && item.month === parseInt(Month) && item.day === parseInt(Day)){
                     document.getElementById("modal").style.display = "block";
-                    let overlay = document.createElement("div");
-                    overlay.className = "modal-overlay";
-                    document.body.appendChild(overlay);
+                    if (!overlay) {
+                        overlay = document.createElement("div");
+                        overlay.className = "modal-overlay";
+                        document.body.appendChild(overlay);
+                    }
                 }
                 // console.log(dateString)
             })
@@ -226,7 +229,10 @@ window.onload = () => {
 
 function closeModal() {
     document.getElementById("modal").style.display = "none";
-    let overlay = document.querySelector(".modal-overlay");
-    document.body.removeChild(overlay);
-    document.body.classList.add("modal-open");
+    if (overlay) {
+        document.body.removeChild(overlay);
+        overlay = null;
+    }
+    // remove the class from the body
+    document.body.classList.remove("modal-open");
 }

@@ -19,15 +19,14 @@ function add_cs() {
 }
 function add_em() {
     document.getElementById("em_id").value = null;
-    document.getElementById("se_time").value = null;
-    document.getElementById("se_kind").value = null;
-    document.getElementById("se_priority").value = null;
-    document.getElementById("se_status").value = null;
-    document.getElementById("se_content").value =null;
-    document.getElementById("se_feedback").value = null;
-    document.getElementById("se_satisfaction").value = null;
-    document.getElementById("cs_id").value = null;
-    document.getElementById("em_id").value = null;
+    document.getElementById("em_name").value = null;
+    var select_sex = document.getElementById("em_gender");
+    select_sex.options[0].selected = true;
+    document.getElementById("em_age").value = null;
+    document.getElementById("em_position").value = null;
+    document.getElementById("em_department").value = null;
+    document.getElementById("em_phone").value = null;
+    document.getElementById("em_email").value = null;
     document.getElementById("em_modal").style.display = "block";
     document.getElementById("em_submit_btn").style.display = "block";
     document.getElementById("em_modify_btn").style.display = "none";

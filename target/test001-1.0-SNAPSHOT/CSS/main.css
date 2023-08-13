@@ -132,6 +132,17 @@
     border: 2px solid #45CBFF;
     cursor: pointer;
 }
+#print_em_table{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: -69px;
+    margin-top: 62px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
 #cs_table_container{
     position: relative;
     background-color: #c7d9eb;

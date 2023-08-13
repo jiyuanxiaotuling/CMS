@@ -111,7 +111,6 @@
     cursor: pointer;
 }
 @media print {
-
     #se_table {
         border-collapse: collapse;
         width: 100%;

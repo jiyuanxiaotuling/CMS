@@ -34,7 +34,9 @@ public class addEmServlet extends HttpServlet {
         em.setEm_email(email);
         em.setEm_addtime(addtime);
         if(request.getParameter("em_btn").equals("提交")){
-            new DB().addEm(em);
+            DB db = new DB();
+            db.addEm(em);
+            db.addAcc(id);
             response.sendRedirect("main.jsp");
         } else if (request.getParameter("em_btn").equals("修改")) {
             new DB().modifyEm(em);

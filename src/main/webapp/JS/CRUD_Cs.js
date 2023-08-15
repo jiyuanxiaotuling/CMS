@@ -437,6 +437,7 @@ function out_cs(){
 // Convert the worksheet to JSON
     let data = XLSX.utils.sheet_to_json(worksheet, {header: 1,range: 0});
 
+
 // Filter the data to only include selected fields
     data = data.map(row => row.filter((_, index) => selectedFields.includes(data[0][index])));
 
@@ -470,6 +471,8 @@ function out_cs(){
             }
         }
     } else {
+        // Remove the header row again
+        data.shift();
         XLSX.writeFile(newWorkbook, '客户信息.xlsx');
     }
 

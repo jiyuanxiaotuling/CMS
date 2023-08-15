@@ -182,6 +182,8 @@
                     <label for="cb_cs_kind" id="cs_kind-label">类别</label>
                     <input type="checkbox" id="cb_cs_remark" class="ck_out_cs" checked>
                     <label for="cb_cs_remark" id="cs_remark-label">描述</label>
+                    <input type="checkbox" id="cb_cs_date" class="ck_out_cs" checked>
+                    <label for="cb_cs_date" id="cs_remark-date">添加时间</label>
                     <br><br>
                     <p style="font-weight: bold">选择导出文件类型</p>
                     <input type="radio" name="out_file_kind" id="xls" class="out_file_kind" checked>

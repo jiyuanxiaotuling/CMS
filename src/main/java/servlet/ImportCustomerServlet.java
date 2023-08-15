@@ -1,5 +1,9 @@
 package servlet;
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +39,16 @@ public class ImportCustomerServlet extends HttpServlet {
                 String address = row.getCell(5).getStringCellValue();
                 String kind = row.getCell(6).getStringCellValue();
                 String remark = row.getCell(7).getStringCellValue();
+                String stringDate = row.getCell(8).getStringCellValue();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+                try {
+                    java.util.Date date = sdf.parse(stringDate);
+                    java.sql.Date addtime = new java.sql.Date(date.getTime());
+                    cs.setCs_addtime(addtime);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
                 // 其他客户信息字段
                 cs.setCs_id(id);
                 cs.setCs_name(name);
@@ -44,6 +58,7 @@ public class ImportCustomerServlet extends HttpServlet {
                 cs.setCs_address(address);
                 cs.setCs_kind(kind);
                 cs.setCs_remark(remark);
+//                cs.setCs_addtime(addtime);
                 new DB().addCs(cs);
             }
             // 返回成功消息，并重定向到主页面
@@ -63,6 +78,16 @@ public class ImportCustomerServlet extends HttpServlet {
                 String address = values[5];
                 String kind = values[6];
                 String remark = values[7];
+                String  dateString = values[8];
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+                try {
+                    java.util.Date date = dateFormat.parse(dateString);
+                    java.sql.Date addtime = new java.sql.Date(date.getTime());
+                    cs.setCs_addtime(addtime);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
                 cs.setCs_id(id);
                 cs.setCs_name(name);
                 cs.setCs_sex(sex);

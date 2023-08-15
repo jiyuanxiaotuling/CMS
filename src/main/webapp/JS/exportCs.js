@@ -20,6 +20,9 @@ for (let i = worksheet['!cols'].length - 1; i >= 0; i--) {
         delete worksheet[columnName + '1'];
     }
 }
+// 删除第一行
+const firstRowKey = Object.keys(worksheet).find(key => key.endsWith('1'));
+delete worksheet[firstRowKey];
 
 // 将工作表添加到工作簿中，并将工作簿导出为 Excel 文件
 XLSX.utils.book_append_sheet(workbook, worksheet, '客户信息');

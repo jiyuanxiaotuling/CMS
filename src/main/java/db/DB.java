@@ -337,6 +337,20 @@ public class DB {
             return false;
         }
     }
+    public boolean addAcc(String em_id){
+        try{
+            pstmt=ct.prepareStatement("insert into account (acc_username,acc_password,em_id,acc_kind) values(?,?,?,?)");
+            pstmt.setString(1, em_id);
+            pstmt.setString(2, "000000");
+            pstmt.setString(3, em_id);
+            pstmt.setString(4, "employee");
+            pstmt.executeUpdate();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
     public boolean addSe(SE se){
         try{
             pstmt=ct.prepareStatement("insert into service (se_id,se_time,se_kind,se_priority,se_status,se_content,se_feedback,se_satisfaction,cs_id,em_id) values(?,?,?,?,?,?,?,?,?,?)");

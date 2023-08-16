@@ -149,4 +149,20 @@
         <servlet-name>deleteSeServlet</servlet-name>
         <url-pattern>/deleteSeServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>BackupRestoreServlet</servlet-name>
+        <servlet-class>servlet.BackupRestoreServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BackupRestoreServlet</servlet-name>
+        <url-pattern>/BackupRestoreServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CheckActivityServlet</servlet-name>
+        <servlet-class>servlet.CheckActivityServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckActivityServlet</servlet-name>
+        <url-pattern>/CheckActivityServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

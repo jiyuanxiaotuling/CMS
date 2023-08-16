@@ -514,4 +514,40 @@ public class DB {
             return false;
         }
     }
+
+    //消息通知
+    //    查找是否有一天内开始的活动
+    public boolean checkFutureAc(){
+        try{
+            pstmt=ct.prepareStatement("SELECT * from activity WHERE ac_btime<=? and ac_etime>=?");
+
+            pstmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()+24*60*60*1000));
+            pstmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            ResultSet rs=pstmt.executeQuery();
+            if(rs.next()) {
+                return true;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+
+    public boolean checkDoingAc(){
+        try{
+            pstmt=ct.prepareStatement("SELECT * from activity WHERE ac_btime<=? and ac_etime>=?");
+
+            pstmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
+            pstmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            ResultSet rs=pstmt.executeQuery();
+            if(rs.next()) {
+                return true;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
 }

@@ -25,11 +25,6 @@
         </div>
         <input  type="submit" name="" id="login_btn" value="登   录" onclick="" style="display: inline-block;left: 124px">
         <input type="reset" name="" id="reset_btn" value="重置" style="">
-        <br>
-        <br>
-        <div style="text-align: center">
-            <span style="color: white">还没有账户？点击</span><a href="register.jsp" style="color: #45CBFF">这里</a><span style="color: white">注册！</span>
-        </div>
     </div>
 </form>
 </body>

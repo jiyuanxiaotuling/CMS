@@ -22,13 +22,16 @@
         <script charset="utf-8"  src="JS/CRUD_Cs.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/importCs.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/underPhoto.js?v=<%= System.currentTimeMillis() %>"></script>
+        <script charset="utf-8"  src="JS/backup.js?v=<%= System.currentTimeMillis() %>"></script>
+        <script charset="utf-8"  src="JS/notificationIcon.js?v=<%= System.currentTimeMillis() %>"></script>
+        <script charset="utf-8"  src="JS/checkActivity.js?v=<%= System.currentTimeMillis() %>"></script>
         <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <title>客户资源管理</title>
     </head>
-    <body>
+    <body onload="notificationIcon()">
         <div class="top-container">
             <h2 class="head-title">客户资源管理系统</h2>
         </div>
@@ -45,7 +48,7 @@
                 <div class="richeng" onclick="showricheng()">
 
                 </div>
-                <div class="tongzhi">
+                <div id="tongzhi" class="tongzhi" onclick="checkActivity()">
 
                 </div>
             </div>
@@ -182,6 +185,8 @@
                     <label for="cb_cs_kind" id="cs_kind-label">类别</label>
                     <input type="checkbox" id="cb_cs_remark" class="ck_out_cs" checked>
                     <label for="cb_cs_remark" id="cs_remark-label">描述</label>
+                    <input type="checkbox" id="cb_cs_date" class="ck_out_cs" checked>
+                    <label for="cb_cs_date" id="cs_remark-date">添加时间</label>
                     <br><br>
                     <p style="font-weight: bold">选择导出文件类型</p>
                     <input type="radio" name="out_file_kind" id="xls" class="out_file_kind" checked>
@@ -363,7 +368,24 @@
                 </div>
             </div>
             <div id="content4" style="display: none" class="main_content">市场活动</div>
-            <div id="content5" style="display: none" class="main_content">数据管理</div>
+            <div id="content5" style="display: none" class="main_content">
+                <h3 style="display: inline-block">备份与恢复</h3>
+                <!-- 备份按钮 -->
+                <button id="backupBtn">备份</button>
+                <input type="file" id="backupFileInput" style="display: none">
+
+                <!-- 恢复按钮 -->
+                <button id="importBtn">恢复</button>
+                <input type="file" id="importFileInput" style="display: none">
+
+                <!-- 自动备份时间间隔设置 -->
+                <h3>设置自动备份时间间隔</h3>
+                <form id="intervalForm">
+                    <input type="text" id="backupInterval" placeholder="时间间隔(天)">
+                    <button id="intervalSubmit">设置自动备份</button>
+                </form>
+
+            </div>
             <div id="content6" style="display: none" class="main_content">
                     <div class="em_menu">
                         <h3 style="display: inline-block">员工基本信息</h3>

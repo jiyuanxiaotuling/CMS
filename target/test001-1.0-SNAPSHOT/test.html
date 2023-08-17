@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #liuyan_btn{
+            padding: 1vmin 2vmin;
+            font-size: 15px;
+            border: none;
+            border-radius: 10vmin;
+            background-image: linear-gradient(90deg,#0acffe,#495aff);
+            color: #fff;
+            cursor: pointer;
+        }
+        body{
+            background-image: url("CSS/icon/liuyan_back.png");
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body>
+<form action="liuyan.jsp" method="post">
+  <div style="position: relative;
+	           margin: 20% auto;">
+      <table border="1" style="margin: 0 auto;">
+        <caption>所有留言信息</caption>
+        <tr><th>留言人姓名</th><th>留言时间</th>
+          <th>留言标题</th><th>留言内容</th></tr>
+        <%
+        ArrayList al=(ArrayList)session.getAttribute("al");
+        Iterator iter=al.iterator();
+        while(iter.hasNext()){
+        Liuyan ly=(Liuyan)iter.next();
+        %>
+        <tr><td><%= new DB().getUserName(ly.getUserId()) %></td>
+          <td><%= ly.getDate().toString() %></td>
+          <td><%= ly.getTitle() %></td>
+          <td><%= ly.getContent() %></td></tr>
+        <%
+        }
+        %>
+      </table>
+      <div style="text-align: center">
+        <input type="submit" id="liuyan_btn" value="留  言" style="margin: 0 auto;"/>
+          <input type="submit" value="提交" style="margin: 0 auto;"/>
+          <input type="reset" value="重置" style="margin: 0 auto;"/>
+      </div>
+  </div>
+</form>
+</body>
+</html>

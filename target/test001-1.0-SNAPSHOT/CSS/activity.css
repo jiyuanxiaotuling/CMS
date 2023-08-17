@@ -1,0 +1,147 @@
+/*选择框的样式*/
+#ac_classify_select{
+    position: absolute;
+    top: 73px;
+    left: 2px;
+    width: 100px;
+    height: 22px;
+    border-radius: 12px;
+    border: none;
+    z-index: 2;
+}
+/*只读输入框的样式，最下面那个框的格式*/
+#ac_classify_outer{
+    position: absolute;
+    top: 70px;
+    left: 0px;
+    width: 260px;
+    height: 28px;
+    border-radius: 20px;
+}
+/*输入框的格式，也就是那个输入要查询的信息的输入框*/
+#ac_classify_inner{
+    position: absolute;
+    top: 74px;
+    left: 105px;
+    width: 120px;
+    height: 19px;
+    border: none;
+    z-index: 3;
+}
+#ac_classify_btn{
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    border: none;
+    position: absolute;
+    left: 225px;
+    top: 71px;
+    background-image: url("icon/button2.png");
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+/*上面这些把搜索框的渲染格式完成了*/
+
+
+#add_ac{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    margin-top: 22px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
+#print_ac_table{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: -69px;
+    margin-top: 62px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
+.ac_modal {
+    display: none; /* 默认隐藏 */
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    height: 480px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.ac_btn{
+    background-color: #03a9f4;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 7px 14px;
+}
+.ac_btn:hover{
+    background-color: #45CBFF;
+}
+.row-container {
+    border-top: 2px solid #03a9f4;
+    z-index: 5;
+}
+#ac_table_container{
+    position: relative;
+    background-color: #c7d9eb;
+    top: 20px;
+    margin: auto;
+    width: 99%;
+    height: 575px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    overflow: auto;
+}
+#ac_table{
+    position: relative;
+    border: 2px solid #03a9f4;
+    width: 99%;
+    text-align: center;
+    margin: auto;
+    border-radius: 10px;
+    top: 13px;
+}
+#select_all_ac{
+    cursor: pointer;
+}
+@media print {
+    #ac_table {
+        border-collapse: collapse;
+        width: 100%;
+        border: black;
+    }
+    #ac_table td:nth-child(1),
+    #ac_table th:nth-child(1) {
+        display: none;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #ddd;
+    }
+    tr td:nth-last-child(-n+3) {
+        display: none;
+    }
+    tr th:nth-last-child(1) {
+        display: none;
+    }
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="CSS/main.css">
+    <script src="JS/showContent.js"></script>
+    <script src="JS/CRUD_Cs.js"></script>
+    <script charset="utf-8"  src="JS/importCs.js"></script>
+    <title>Title</title>
+</head>
+<body>
+  <div class="top-container">
+    <h2 class="head-title">客户资源管理系统</h2>
+  </div>
+  <div class="left-container">
+      <div class="head-photo">
+          <div class="head-picture">
+          </div>
+          <div class="person_info">
+
+          </div>
+          <div class="richeng">
+
+          </div>
+          <div class="tongzhi">
+
+          </div>
+      </div>
+      <hr style="margin-top: 0; border-width: 2px">
+      <div class="left-title" onclick="showContent(1)">
+          <p class="left-title-word">系统主页</p>
+      </div>
+      <div class="left-title" onclick="showContent(2)">
+          <p class="left-title-word">客户管理</p>
+      </div>
+      <div class="left-title" onclick="showContent(3)">
+          <p class="left-title-word">客服管理</p>
+      </div>
+      <div class="left-title" onclick="showContent(4)">
+          <p class="left-title-word">市场活动</p>
+      </div>
+      <div class="left-title" onclick="showContent(5)">
+          <p class="left-title-word">日程安排</p>
+      </div>
+      <div class="left-title" onclick="showContent(6)">
+          <p class="left-title-word">数据管理</p>
+      </div>
+      <div class="left-title" onclick="showContent(7)">
+          <p class="left-title-word">系统管理</p>
+      </div>
+  </div>
+  <div class="right-container">
+      <div id="modal" class="modal">
+          <div class="modal-content">
+              <span class="close-button" onclick="closeModal()">&times;</span>
+              <form>
+                  <label for="id">&nbsp;I&nbsp;D：&nbsp;</label>
+                  <input type="text" id="id" name="id"><br><br>
+                  <label for="name">姓名：</label>
+                  <input type="text" id="name" name="name"><br><br>
+                  <label for="gender">性别：</label>
+                  <select id="gender" name="gender">
+                      <option value="男">男</option>
+                      <option value="女">女</option>
+                  </select><br><br>
+
+                  <label for="phone">电话：</label>
+                  <input type="text" id="phone" name="phone"><br><br>
+
+                  <label for="email">邮箱：</label>
+                  <input type="email" id="email" name="email"><br><br>
+
+                  <label for="address">地址：</label>
+                  <input type="text" id="address" name="address"><br><br>
+
+                  <label for="category">类别：</label>
+                  <select id="category" name="category">
+                      <option value="客户">已有客户</option>
+                      <option value="VIP客户">潜在客户</option>
+                  </select><br><br>
+                  <button type="submit">提交</button>
+              </form>
+          </div>
+      </div>
+      <div id="out_cs" class="out_cs">
+          <p style="font-size: 20px;font-weight: bolder;margin-top: 5px">导出客户</p>
+          <p style="font-weight: bold">选择导出字段</p>
+          <input type="checkbox" id="select-all">
+          <label for="select-all" id="select-all-label">全选</label>
+          <br><br>
+          <input type="checkbox" id="cb_cs_id" class="ck_out_cs" checked>
+          <label for="cb_cs_id" id="cs_id-label">ID</label>
+          <input type="checkbox" id="cb_cs_name" class="ck_out_cs" checked>
+          <label for="cb_cs_name" id="cs_name-label">姓名</label>
+          <input type="checkbox" id="cb_cs_sex" class="ck_out_cs" checked>
+          <label for="cb_cs_sex" id="cs_sex-label">性别</label>
+          <input type="checkbox" id="cb_cs_phone" class="ck_out_cs" checked>
+          <label for="cb_cs_phone" id="cs_phone-label">电话</label>
+          <input type="checkbox" id="cb_cs_email" class="ck_out_cs" checked>
+          <label for="cb_cs_email" id="cs_email-label">邮箱</label>
+          <input type="checkbox" id="cb_cs_address" class="ck_out_cs" checked>
+          <label for="cb_cs_address" id="cs_address-label">地址</label>
+          <input type="checkbox" id="cb_cs_kind" class="ck_out_cs" checked>
+          <label for="cb_cs_kind" id="cs_kind-label">类别</label>
+          <input type="checkbox" id="cb_cs_remark" class="ck_out_cs" checked>
+          <label for="cb_cs_remark" id="cs_remark-label">描述</label>
+          <br><br>
+          <p style="font-weight: bold">选择导出文件类型</p>
+          <input type="radio" name="out_file_kind" id="xls" class="out_file_kind" checked>
+          <label for="xls" >xls</label>
+          <input type="radio" name="out_file_kind" id="csv" class="out_file_kind">
+          <label for="xls" >csv</label>
+          <input type="button" id="out_cs_btn" value="导出">
+          <input type="button" id="out_cs_btn_back" value="取消">
+      </div>
+      <div id="content1" style="display: block">
+
+    </div>
+<!--      客户管理-->
+    <div id="content2" style="display: none">
+        <div id="IO_div" class="IO_div" style="display: none">
+            <button class="file_button">
+                导入
+            </button>
+            <div class="O_div">
+                导出
+            </div>
+        </div>
+        <form action="ImportCustomerServlet" method="post" enctype="multipart/form-data">
+            <div class="importCsDiv" id="importCsDiv" style="display: block">
+                <h3 style="margin-top: 0px">导入客户</h3>
+                <input type="file"  name="importCsFile" class="file_input" style="cursor:pointer;"  />
+                <input type="submit" id="importCsSubmit" value="确认提交">
+                <input type="button" id="notImportCsSubmit" value="取消" onclick="close_importCs()">
+                <p style="font-size: 13px;position:absolute;bottom: 5px">注意：1.导入文件应为xlsx或csv文件<br>&emsp;&emsp;&emsp;2.ID一列应该设置为文本格式</p>
+            </div>
+        </form>
+        <div class="em_menu">
+            <h3 style="display: inline-block">客户基本信息</h3>
+            <select id="cs_classify_select">
+                <option>I D</option>
+                <option>姓名</option>
+                <option>性别</option>
+                <option>电话</option>
+                <option>邮箱</option>
+                <option>地址</option>
+                <option>类别</option>
+            </select>
+            <input type="button" value="删除选中" class="deleteChecked" id="deleteCheckedCs">
+            <input id="cs_classify_outer" readonly>
+            <input id="cs_classify_inner" >
+            <input id="cs_classify_btn" type="submit" value="">
+            <input class="refresh-button" type="button" onclick="refresh_page()">
+            <input id="add_cs" type="button" value="新增客户" onclick="add_cs()">
+            <input id="print_cs_table" type="button" value="打印表格" onclick="print_cs_table()">
+            <input id="io_cs_table" type="button" value="···" onclick="io_cs_table()">
+        </div>
+        <div id="cs_table_container">
+            <table id="cs_table">
+                <tr style="background-color: cornflowerblue">
+                    <th>姓名</th>
+                    <th width="50">性别</th>
+                    <th width="130">电话</th>
+                    <th>邮箱</th>
+                    <th>地址</th>
+                    <th>类别</th>
+                    <th colspan="3" >操作</th>
+                </tr>
+                <tr>
+                    <td>薄丝菌</td>
+                    <td>男</td>
+                    <td>11451419198</td>
+                    <td>575552896@qq.com</td>
+                    <td>河北省邢台市</td>
+                    <td>潜在客户</td>
+                    <td width="25"><input type="button" class="cs_modify" value="修改" onclick="modify_cs(2)"></td>
+                    <td width="25"><input type="button" class="cs_modify" value="删除"></td>
+                    <td width="25"><input type="button" class="cs_modify" value="打印" onclick="print_cs(1)"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="content3" style="display: none">客服管理</div>
+    <div id="content4" style="display: none">市场活动</div>
+    <div id="content5" style="display: none">日程安排</div>
+    <div id="content6" style="display: none">数据管理</div>
+    <div id="content7" style="display: none">
+
+    </div>
+  </div>
+</body>
+</html>

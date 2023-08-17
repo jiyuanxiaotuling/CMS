@@ -1,0 +1,700 @@
+.top-container{
+    position: absolute;
+    background-color: cornflowerblue;
+    margin: auto;
+    height: 100px;
+    width: 99%;
+    border-radius: 15px;
+}
+.left-container{
+    float: left;
+    margin-top: 130px;
+    background-color: cornflowerblue;
+    height: 750px;
+    width: 200px;
+    border-radius: 15px;
+}
+.right-container{
+    position: absolute;
+    margin-top: 130px;
+    margin-left: 230px;
+    height: 750px;
+    width: 85%;
+    border-radius: 15px;
+}
+.head-photo{
+    position: relative;
+    height: 200px;
+    background-color:cornflowerblue;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.head-picture{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+    margin: auto auto;
+    top: 20px;
+    background-image: url("icon/avatar.png");
+    background-size: cover;
+}
+.head-title{
+    position: absolute;
+    margin-top: 35px;
+    color: white;
+}
+.left-title{
+    position: relative;
+    margin-top: -7px;
+    height: 50px;
+}
+.left-title:hover{
+    background-color: #03a9f4;
+    cursor: pointer;
+}
+.left-title-word{
+    font-family: "Microsoft YaHei UI";
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    top: 18%;
+    transform: translateY(-50%);
+    margin-left: 5px;
+}
+
+.em_menu{
+    background-color: #c7d9eb;
+    position: relative;
+    top: 1px;
+    margin: auto;
+    width: 99%;
+    height: 150px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+#add_cs{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    margin-top: 22px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
+#add_em{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    margin-top: 22px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
+#print_cs_table{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: -69px;
+    margin-top: 62px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
+#io_cs_table{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: -69px;
+    margin-top: 105px;
+    background-color: #45CBFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+#io_cs_table:active{
+    background-color: #03a9f4;
+}
+#print_em_table{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: -69px;
+    margin-top: 62px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
+#print_em_table{
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: -69px;
+    margin-top: 62px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
+#cs_table_container{
+    position: relative;
+    background-color: #c7d9eb;
+    top: 15px;
+    margin: auto;
+    width: 99%;
+    height: 575px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    overflow: auto;
+}
+
+#em_table_container{
+    position: relative;
+    background-color: #c7d9eb;
+    top: 20px;
+    margin: auto;
+    width: 99%;
+    height: 575px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    overflow: auto;
+}
+#cs_table{
+    position: relative;
+    border: 2px solid #03a9f4;
+    width: 98%;
+    text-align: center;
+    border-radius: 10px;
+    margin: auto;
+    top: 13px;
+
+}
+td,th {
+    border-radius: 6px; /* 设置圆角半径 */
+}
+#em_table{
+    position: relative;
+    border: 2px solid #03a9f4;
+    width: 99%;
+    text-align: center;
+    margin: auto;
+    border-radius: 10px;
+    top: 13px;
+}
+.modal {
+    display: none; /* 默认隐藏 */
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    height: 380px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.out_cs {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
+    height: 300px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+#select-all{
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+#select-all-label {
+    cursor: pointer;
+}
+.ck_out_cs{
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+.out_file_kind{
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    transition: all 0.3s; /* 添加过渡效果 */
+}
+#out_cs_btn{
+    position: absolute;
+    right: 70px;
+    bottom: 20px;
+    background-color: #45CBFF;
+    cursor: pointer;
+    border: 2px solid #45CBFF;;
+    border-radius: 3px;
+    color: white;
+}
+#out_cs_btn_back{
+    position: absolute;
+    right: 15px;
+    bottom: 20px;
+    border-radius: 3px;
+    border-color: #cccccc;
+    cursor: pointer;
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 9;
+    backdrop-filter: blur(10px);
+}
+.em_modal {
+    display: none; /* 默认隐藏 */
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    height: 380px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.em_modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 9;
+    backdrop-filter: blur(10px);
+}
+.close-button {
+    color: #aaa;
+    position: relative;
+    top: -15px;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.cs_modify{
+    background-color: transparent;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.em_modify{
+    background-color: transparent;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+@media print {
+    #cs_table {
+        border-collapse: collapse;
+        width: 100%;
+        border: black;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #ddd;
+    }
+    tr td:nth-last-child(-n+3) {
+        display: none;
+    }
+    tr th:nth-last-child(1) {
+        display: none;
+    }
+    #cs_table td:nth-child(1),
+    #cs_table th:nth-child(1) {
+        display: none;
+    }
+    #em_table td:nth-child(1),
+    #em_table th:nth-child(1) {
+        display: none;
+    }
+    #em_table {
+        border-collapse: collapse;
+        width: 100%;
+        border: black;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #ddd;
+    }
+    tr td:nth-last-child(-n+3) {
+        display: none;
+    }
+    tr th:nth-last-child(1) {
+        display: none;
+    }
+}
+#cs_classify_outer{
+    position: absolute;
+    top: 70px;
+    left: 0px;
+    width: 210px;
+    height: 28px;
+    border-radius: 20px;
+}
+#em_classify_outer{
+    position: absolute;
+    top: 70px;
+    left: 0px;
+    width: 210px;
+    height: 28px;
+    border-radius: 20px;
+}
+#cs_classify_inner{
+    position: absolute;
+    top: 74px;
+    left: 53px;
+    width: 120px;
+    height: 19px;
+    border: none;
+    z-index: 3;
+}
+#em_classify_inner{
+    position: absolute;
+    top: 74px;
+    left: 53px;
+    width: 120px;
+    height: 19px;
+    border: none;
+    z-index: 3;
+}
+#cs_classify_btn{
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    border: none;
+    position: absolute;
+    left: 180px;
+    top: 71px;
+    background-image: url("icon/button2.png");
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+#em_classify_btn{
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    border: none;
+    position: absolute;
+    left: 180px;
+    top: 71px;
+    background-image: url("icon/button2.png");
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+#cs_classify_select{
+    position: absolute;
+    top: 73px;
+    left: 2px;
+    width: 50px;
+    height: 22px;
+    border-radius: 12px;
+    border: none;
+    z-index: 2;
+}
+#em_classify_select{
+    position: absolute;
+    top: 73px;
+    left: 2px;
+    width: 50px;
+    height: 22px;
+    border-radius: 12px;
+    border: none;
+    z-index: 2;
+}
+.refresh-button {
+    display: inline-block;
+    position: absolute;
+    top: 99px;
+    right: 50px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    background-image: url("icon/refresh.png");
+    background-size: cover;
+    cursor: pointer;
+    border: none;
+}
+.cs_btn{
+    background-color: #03a9f4;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 7px 14px;
+}
+.cs_btn:hover{
+    background-color: #45CBFF;
+}
+.em_btn{
+    background-color: #03a9f4;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 7px 14px;
+}
+.em_btn:hover{
+    background-color: #45CBFF;
+}
+.IO_div{
+    position: fixed;
+    width: 50px;
+    height:50px;
+    z-index: 20;
+    background-color: #f441a5;
+    right: 30px;
+    margin-top: 137px;
+}
+.I_div{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height:50%;
+    z-index: 21;
+    background-color: #45CBFF;
+    color: white;
+    font-weight: normal;
+    cursor: pointer;
+}
+.I_div:hover{
+    background-color: #03a9f4;
+}
+.O_div{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height:50%;
+    z-index: 21;
+    background-color: #45CBFF;
+    color: white;
+    font-weight: normal;
+    cursor: pointer;
+}
+.O_div:hover{
+    background-color: #03a9f4;
+}
+.file_button{
+    width: 100%;
+    height:50%;
+    z-index: 22;
+    background-color: #45CBFF;
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+}
+.file_button:hover{
+    background-color: #03a9f4;
+}
+
+.importCsDiv{
+    display: none;
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    height: 200px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.file_name{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: not-allowed;
+    width: 150px
+}
+#importCsSubmit{
+    background-color: #45CBFF;
+    cursor: pointer;
+    border: 2px solid #45CBFF;;
+    border-radius: 3px;
+    color: white;
+    position: absolute;
+    bottom: 60px;
+    right: 75px;
+}
+#importCsSubmit:hover{
+    background-color: #03a9f4;
+}
+#notImportCsSubmit{
+    border-radius: 3px;
+    border-color: #cccccc;
+    position: absolute;
+    bottom: 60px;
+    right: 25px;
+    cursor: pointer;
+}
+.person_info{
+    position: absolute;
+    left: 20px;
+    bottom: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-image: url("icon/person_info.png");
+    background-size: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.richeng{
+    position: absolute;
+    left: 81px;
+    bottom: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-image: url("icon/richeng.png");
+    background-size: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.tongzhi{
+    position: absolute;
+    left: 145px;
+    bottom: 30px;
+    width: 26px;
+    height: 26px;
+    border: 3px solid;
+    border-radius: 50%;
+    background-image: url("icon/tongzhi.png");
+    background-size: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.person_info:hover{
+    transform: scale(1.2);
+}
+.person_info:after{
+    content: "个人资料";
+    font-size: 10px;
+    color: white;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    display: inline-block;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.person_info:hover::after{
+    opacity: 1;
+}
+.richeng:hover{
+    transform: scale(1.2);
+}
+.richeng:after{
+    content: "日程提醒";
+    font-size: 10px;
+    color: white;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    display: inline-block;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.richeng:hover::after{
+    opacity: 1;
+}
+.tongzhi:hover{
+    transform: scale(1.2);
+}
+.tongzhi:after{
+    content: "消息通知";
+    font-size: 10px;
+    color: white;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    display: inline-block;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.tongzhi:hover::after{
+    opacity: 1;
+}
+#select_all_cs{
+    cursor: pointer;
+}
+.row-checkbox-cs{
+    cursor: pointer;
+}
+#select_all_em{
+    cursor: pointer;
+}
+.row-checkbox-em{
+    cursor: pointer;
+}
+.deleteChecked{
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    background-color: #45CBFF;
+    color: white;
+    border: #45CBFF;
+    cursor: pointer;
+    display: none;
+}

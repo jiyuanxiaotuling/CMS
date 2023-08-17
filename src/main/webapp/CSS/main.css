@@ -816,3 +816,9 @@ div.rankChart{
     border-top: 5px solid #1F64CA;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+.seStatus{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}

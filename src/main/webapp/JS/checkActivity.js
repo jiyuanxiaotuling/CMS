@@ -26,7 +26,6 @@ function checkActivity() {
             }
         }
     };
-
     // 发送请求
     xhr.send();
 }

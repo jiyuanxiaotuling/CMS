@@ -309,37 +309,16 @@ function classifySe(){
     window.location.reload();
 }
 function cs_refresh_page(){
-    window.location.reload(true);
+    window.location.reload();
+    document.getElementById("content2").style.display = "block";
 }
 function em_refresh_page(){
-    var xhr = new XMLHttpRequest();
-    var branch = document.getElementById("em_classify_select").value;
-    var keyword = document.getElementById("em_classify_inner").value;
-    xhr.open('POST', 'classifyEmServlet', true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            // 处理 Servlet 返回的数据
-            console.log(this.responseText);
-        }
-    };
-    xhr.send('branch=' + encodeURIComponent(branch) + '&keyword='  + encodeURIComponent(keyword));
     window.location.reload();
+    document.getElementById("content6").style.display = "block";
 }
 function se_refresh_page(){
-    var xhr = new XMLHttpRequest();
-    var branch = document.getElementById("se_classify_select").value;
-    var keyword = document.getElementById("se_classify_inner").value;
-    xhr.open('POST', 'classifySeServlet', true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            // 处理 Servlet 返回的数据
-            console.log(this.responseText);
-        }
-    };
-    xhr.send('branch=' + encodeURIComponent(branch) + '&keyword='  + encodeURIComponent(keyword));
     window.location.reload();
+    document.getElementById("content3").style.display = "block";
 }
 function saveDivStates() {
     // 保存每个 div 的显示状态到 sessionStorage 中

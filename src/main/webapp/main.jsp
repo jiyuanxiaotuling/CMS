@@ -23,9 +23,9 @@
         <script charset="utf-8"  src="JS/CRUD_Cs.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/importCs.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/underPhoto.js?v=<%= System.currentTimeMillis() %>"></script>
-<%--        <script charset="utf-8"  src="JS/backup.js?v=<%= System.currentTimeMillis() %>"></script>--%>
-<%--        <script charset="utf-8"  src="JS/notificationIcon.js?v=<%= System.currentTimeMillis() %>"></script>--%>
-<%--        <script charset="utf-8"  src="JS/checkActivity.js?v=<%= System.currentTimeMillis() %>"></script>--%>
+        <script charset="utf-8"  src="JS/backup.js?v=<%= System.currentTimeMillis() %>"></script>
+        <script charset="utf-8"  src="JS/notificationIcon.js?v=<%= System.currentTimeMillis() %>"></script>
+        <script charset="utf-8"  src="JS/checkActivity.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/selectCs.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/exportSelectAll.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/exportCs.js?v=<%= System.currentTimeMillis() %>"></script>
@@ -184,7 +184,7 @@
                             </tr>
                             <%
                                 ArrayList cnt_al=new DB().findSeRank();
-                                Iterator cnt_iter=cnt_al.iterator();
+                                Iterator cnt_iter = cnt_al.iterator();
 //                          用来确定是哪一行的按钮
                                 int rank_i = 0;
                                 while(cnt_iter.hasNext()){
@@ -434,7 +434,7 @@
                 <div id="se_table_container">
                     <table id="se_table">
                         <tr style="background-color: cornflowerblue">
-                            <th><input type="checkbox" id="select_all_se" onclick="selectAllSe()"></th>
+                            <th width="25px"></th>
                             <th>ID</th>
                             <th>时间</th>
                             <th width="50">类别</th>
@@ -462,7 +462,13 @@
                                 se_i++;
                         %>
                         <tr>
-                            <td><input type="checkbox" name="row-checkbox-em" class="row-checkbox-em"></td>
+                            <td><%
+                                if(se.getSe_status().equals("已处理")){
+                                    out.print("<div class=\"seStatus\" id=\"seStatus\" style=\"background-color: green;\">");
+                                } else {
+                                    out.print("<div class=\"seStatus\" id=\"seStatus\" style=\"background-color: red;\">");
+                                }
+                            %></td>
                             <td><%= se.getSe_id()%></td>
                             <td><%= se.getSe_time() %></td>
                             <td><%= se.getSe_kind() %></td>

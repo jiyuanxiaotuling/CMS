@@ -40,7 +40,6 @@ public class DB {
             pstmt.setString(1,username);
             pstmt.setString(2,password);
             ResultSet rs=pstmt.executeQuery();
-
             if(!rs.next()){
                 return null;
             }else{
@@ -48,6 +47,8 @@ public class DB {
                 user.setId(rs.getInt(1));
                 user.setUsername(rs.getString(2));
                 user.setPassword(rs.getString(3));
+                pstmt.close();
+                ct.close();
                 return user;
             }
         }catch(Exception e){
@@ -62,6 +63,8 @@ public class DB {
             rs = pstmt.executeQuery();
             while(rs.next()){
                 if(username.equals(rs.getString(1))){
+                    pstmt.close();
+                    ct.close();
                     return true;
                 }
             }
@@ -79,6 +82,8 @@ public class DB {
             while(rs.next())  {
                 emid = rs.getString(1);
             }
+            pstmt.close();
+            ct.close();
             return emid;
         } catch(Exception e)  {
             e.printStackTrace();
@@ -104,6 +109,8 @@ public class DB {
                 cs_info.setCs_addtime(rs.getDate(9));
                 al.add(cs_info);
             }
+            pstmt.close();
+            ct.close();
             return al;
         }catch(Exception e){
             e.printStackTrace();
@@ -149,6 +156,8 @@ public class DB {
                 se_info.setEm_id(rs.getString(10));
                 al.add(se_info);
             }
+            pstmt.close();
+            ct.close();
             return al;
         }catch(Exception e){
             e.printStackTrace();
@@ -173,6 +182,8 @@ public class DB {
                 em_info.setEm_addtime(rs.getDate(10));
                 al.add(em_info);
             }
+            pstmt.close();
+            ct.close();
             return al;
         }catch(Exception e){
             e.printStackTrace();
@@ -199,6 +210,8 @@ public class DB {
                 em_info.setEm_addtime(rs.getDate(10));
                 al.add(em_info);
             }
+            pstmt.close();
+            ct.close();
             return al;
         }catch(Exception e){
             e.printStackTrace();
@@ -229,6 +242,8 @@ public class DB {
                 cs_info.setCs_addtime(rs.getDate(9));
                 al.add(cs_info);
             }
+            pstmt.close();
+            ct.close();
             return al;
         }catch(Exception e){
             e.printStackTrace();
@@ -258,6 +273,8 @@ public class DB {
                 em_info.setEm_addtime(rs.getDate(10));
                 em_al.add(em_info);
             }
+            pstmt.close();
+            ct.close();
             return em_al;
         }catch(Exception e){
             e.printStackTrace();
@@ -288,6 +305,8 @@ public class DB {
                 se_info.setEm_id(rs.getString(10));
                 se_al.add(se_info);
             }
+            pstmt.close();
+            ct.close();
             return se_al;
         }catch(Exception e){
             e.printStackTrace();
@@ -313,6 +332,8 @@ public class DB {
                 ac.setAc_etime_specific(rs.getTimestamp(7));
                 ac_info.add(ac);
             }
+            pstmt.close();
+            ct.close();
             return ac_info;
         }catch(Exception e){
             e.printStackTrace();
@@ -333,6 +354,8 @@ public class DB {
             pstmt.setString(8, cs.getCs_id());
             pstmt.setDate(9, (Date) cs.getCs_addtime());
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -352,6 +375,8 @@ public class DB {
             pstmt.setString(8, em.getEm_email());
             pstmt.setDate(9, em.getEm_addtime());
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -366,6 +391,8 @@ public class DB {
             pstmt.setString(3, em_id);
             pstmt.setString(4, "employee");
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -386,6 +413,8 @@ public class DB {
             pstmt.setString(9, se.getCs_id());
             pstmt.setString(10, se.getEm_id());
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -405,6 +434,8 @@ public class DB {
             pstmt.setString(7, cs.getCs_remark());
             pstmt.setString(8, cs.getCs_id());
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -423,6 +454,8 @@ public class DB {
             pstmt.setString(7, em.getEm_email());
             pstmt.setString(8, em.getEm_id());
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -442,6 +475,8 @@ public class DB {
             pstmt.setString(8, se.getEm_id());
             pstmt.setString(9, se.getSe_id());
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -454,6 +489,8 @@ public class DB {
             pstmt.setString(1, pwd);
             pstmt.setString(2, id);
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -467,6 +504,8 @@ public class DB {
             pstmt.setString(2, email);
             pstmt.setString(3, id);
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -479,6 +518,8 @@ public class DB {
             pstmt.setString(1, id);
             ResultSet rs=pstmt.executeQuery();
             if(rs.next()) {
+                pstmt.close();
+                ct.close();
                 return rs.getString(1);
             }
         }catch(Exception e){
@@ -493,6 +534,8 @@ public class DB {
             pstmt=ct.prepareStatement("DELETE from customer_info WHERE cs_id=?");
             pstmt.setString(1,id);
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -504,6 +547,8 @@ public class DB {
             pstmt=ct.prepareStatement("DELETE from employee WHERE em_id=?");
             pstmt.setString(1,id);
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -515,6 +560,8 @@ public class DB {
             pstmt=ct.prepareStatement("DELETE from service WHERE cs_id=?");
             pstmt.setString(1,id);
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -529,6 +576,8 @@ public class DB {
             pstmt.setString(1, username);
             pstmt.setString(2, pwd);
             pstmt.executeUpdate();
+            pstmt.close();
+            ct.close();
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -546,6 +595,8 @@ public class DB {
             pstmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             ResultSet rs=pstmt.executeQuery();
             if(rs.next()) {
+                pstmt.close();
+                ct.close();
                 return true;
             }
         }catch(Exception e){
@@ -563,6 +614,8 @@ public class DB {
             pstmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             ResultSet rs=pstmt.executeQuery();
             if(rs.next()) {
+                pstmt.close();
+                ct.close();
                 return true;
             }
         }catch(Exception e){
@@ -580,6 +633,8 @@ public class DB {
             if(rs.next()){
                 count = rs.getInt(1);
             }
+            pstmt.close();
+            ct.close();
             return count;
         }catch(Exception e){
             e.printStackTrace();
@@ -595,6 +650,8 @@ public class DB {
             if(rs.next()){
                 count = rs.getInt(1);
             }
+            pstmt.close();
+            ct.close();
             return count;
         }catch(Exception e){
             e.printStackTrace();
@@ -611,6 +668,8 @@ public class DB {
             if(rs.next()){
                 count = rs.getInt(1);
             }
+            pstmt.close();
+            ct.close();
             return count;
         }catch(Exception e){
             e.printStackTrace();
@@ -626,6 +685,8 @@ public class DB {
             if(rs.next()){
                 count = rs.getInt(1);
             }
+            pstmt.close();
+            ct.close();
             return count;
         }catch(Exception e){
             e.printStackTrace();
@@ -641,6 +702,8 @@ public class DB {
             if(rs.next()){
                 count = rs.getInt(1);
             }
+            pstmt.close();
+            ct.close();
             return count;
         }catch(Exception e){
             e.printStackTrace();

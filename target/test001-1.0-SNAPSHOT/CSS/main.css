@@ -619,6 +619,20 @@ td,th {
     cursor: pointer;
     transition: transform 0.3s ease;
 }
+.tongzhi.active{
+    position: absolute;
+    left: 145px;
+    bottom: 30px;
+    width: 26px;
+    height: 26px;
+    border: 3px solid;
+    border-radius: 50%;
+    background-image: url("icon/tongzhi.png");
+    background-size: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    background-color: #CE000E;
+}
 .person_info:hover{
     transform: scale(1.2);
 }
@@ -697,4 +711,44 @@ td,th {
     border: #45CBFF;
     cursor: pointer;
     display: none;
+}
+#backupBtn{
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 22px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
+
+#importBtn{
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 22px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
+
+#intervalSubmit{
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 22px;
+    background-color: #45CBFF;
+    color: white;
+    border: 2px solid #45CBFF;
+    cursor: pointer;
+}
+#backupInterval{
+
+    top: 70px;
+    left: 0px;
+    width: 210px;
+    height: 28px;
+    border-radius: 20px;
 }

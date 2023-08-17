@@ -378,6 +378,7 @@ function restoreDivStates() {
 }
 window.onload = function() {
     restoreDivStates();
+    notificationIcon();
 };
 // 在页面卸载时，保存每个 div 的显示状态
 window.onunload = function() {

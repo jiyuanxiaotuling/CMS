@@ -31,7 +31,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <title>客户资源管理</title>
     </head>
-    <body onload="notificationIcon()">
+    <body>
         <div class="top-container">
             <h2 class="head-title">客户资源管理系统</h2>
         </div>

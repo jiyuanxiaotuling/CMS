@@ -65,6 +65,7 @@
             <div class="left-title" onclick="showContent(5)">
                 <p class="left-title-word">备份恢复</p>
             </div>
+<%--            --%>
             <%
                 String userRole = (String) session.getAttribute("userRole");
                 if ("admin".equals(userRole)) {

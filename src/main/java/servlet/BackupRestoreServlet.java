@@ -31,7 +31,7 @@ public class BackupRestoreServlet extends HttpServlet {
         response.setHeader("Content-Disposition", "attachment;filename=backup.sql");
 
         try (OutputStream out = response.getOutputStream()) {
-            Process process = Runtime.getRuntime().exec("C:/Program Files/MySQL/MySQL Server 8.0/bin/mysqldump -u " + dbUser + " -p" + dbPass + " " + dbName);
+            Process process = Runtime.getRuntime().exec("D:/MySQL/mysql-5.7.19-winx64/bin/mysqldump -u " + dbUser + " -p" + dbPass + " " + dbName);
             InputStream inputStream = process.getInputStream();
 
             int bytesRead;

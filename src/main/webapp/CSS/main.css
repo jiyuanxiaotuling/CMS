@@ -16,6 +16,7 @@
 }
 .right-container{
     position: absolute;
+    display: block;
     margin-top: 130px;
     margin-left: 230px;
     height: 750px;
@@ -188,7 +189,16 @@ td,th {
     border-radius: 10px;
     top: 13px;
 }
-.modal {
+#seRankTable{
+    position: relative;
+    border: 2px solid #03a9f4;
+    width: 99%;
+    text-align: center;
+    margin: auto;
+    border-radius: 10px;
+    top: 13px;
+}
+.modal{
     display: none; /* 默认隐藏 */
     position: absolute;
     z-index: 10;
@@ -722,7 +732,6 @@ td,th {
     border: 2px solid #45CBFF;
     cursor: pointer;
 }
-
 #importBtn{
     position: relative;
     display: inline-block;
@@ -733,7 +742,6 @@ td,th {
     border: 2px solid #45CBFF;
     cursor: pointer;
 }
-
 #intervalSubmit{
     position: relative;
     display: inline-block;
@@ -751,4 +759,60 @@ td,th {
     width: 210px;
     height: 28px;
     border-radius: 20px;
+}
+div.increaseInfo{
+    position: relative;
+    width: 1390px;
+    height: 250px;
+    margin-top: 2px;
+    border-top: 5px solid #1F64CA;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+span.increaseIcon{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    display: block;
+    z-index: 10;
+    border-radius: 50%;
+    background-image: url("icon/increase.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+p.increaseP{
+    position: absolute;
+    left: 35px;
+    top: -16px;
+    font-size: 18px;
+}
+div.increaseRate{
+    width: 23%;
+    height: 70%;
+    position: relative;
+    display: inline-block;
+    margin-top: 45px;
+    margin-left: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+p.increaseTitle{
+    position: absolute;
+}
+div.dealChart{
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+    width: 680px;
+    height: 450px;
+    border-top: 5px solid #1F64CA;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+div.rankChart{
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 30px;
+    width: 676px;
+    height: 450px;
+    border-top: 5px solid #1F64CA;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }

@@ -1,6 +1,7 @@
 package db;
 import java.net.URLEncoder;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
@@ -108,6 +109,26 @@ public class DB {
             e.printStackTrace();
             return null;
         }
+    }
+    public ArrayList findSeRank(){
+        try{
+            pstmt=ct.prepareStatement("select em_id,count(*) from service GROUP BY em_id ");
+            ArrayList al=new ArrayList();
+            ResultSet rs=pstmt.executeQuery();
+            while(rs.next()){
+                countSe cnt = new countSe();
+                cnt.setEm_id(rs.getString(1));
+                cnt.setCount(rs.getInt(2));
+                al.add(cnt);
+            }
+            pstmt.close();
+            ct.close();
+            return al;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
     }
     public ArrayList findSeInfo(){
         try{
@@ -549,5 +570,81 @@ public class DB {
             return false;
         }
         return false;
+    }
+    public int findIncreaseCs(int month){
+        try{
+            pstmt=ct.prepareStatement("select count(*) from customer_info where MONTH(cs_addtime) = ?");
+            pstmt.setInt(1, month);
+            ResultSet rs=pstmt.executeQuery();
+            int count = 0;
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+            return count;
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public int findIncreaseSe(int month){
+        try{
+            pstmt=ct.prepareStatement("select count(*) from service where MONTH(se_time) = ?");
+            pstmt.setInt(1, month);
+            ResultSet rs=pstmt.executeQuery();
+            int count = 0;
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+            return count;
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public int findIncreaseSeStatus(int month){
+        try{
+            pstmt=ct.prepareStatement("select count(*) from service where MONTH(se_time) = ? and se_status = ?");
+            pstmt.setInt(1, month);
+            pstmt.setString(2, "已处理");
+            ResultSet rs=pstmt.executeQuery();
+            int count = 0;
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+            return count;
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public int findIncreaseAc(int month){
+        try{
+            pstmt=ct.prepareStatement("select count(*) from activity where MONTH(ac_btime) = ?");
+            pstmt.setInt(1, month);
+            ResultSet rs=pstmt.executeQuery();
+            int count = 0;
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+            return count;
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public int findIncreaseEm(int month){
+        try{
+            pstmt=ct.prepareStatement("select count(*) from employee where MONTH(em_addtime) = ?");
+            pstmt.setInt(1, month);
+            ResultSet rs=pstmt.executeQuery();
+            int count = 0;
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+            return count;
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

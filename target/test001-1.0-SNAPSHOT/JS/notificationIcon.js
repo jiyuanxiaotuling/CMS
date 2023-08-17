@@ -2,18 +2,14 @@
 function notificationIcon() {
     // 创建 XMLHttpRequest 对象
     var xhr = new XMLHttpRequest();
-
     // 设置请求方法和URL
     xhr.open('GET', 'CheckActivityServlet', true);
-
     // 设置回调函数，处理服务器端响应
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 // 处理服务器端返回的活动信息
                 var activity = xhr.responseText;
-
-
                 var tongzhi = document.getElementById('tongzhi');
 
                 // 根据活动信息更改图标外观
@@ -23,11 +19,9 @@ function notificationIcon() {
                 } else {
                     tongzhi.classList.add('active');
                 }
-
             }
         }
     };
-
     // 发送请求
     xhr.send();
 }

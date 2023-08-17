@@ -13,9 +13,6 @@ function checkActivity() {
                 // 处理服务器端返回的活动信息
                 var activity = xhr.responseText;
 
-
-
-
                 // 显示相应的弹窗内容
                 if (activity === "hasFutureActivity") {
                     alert('有活动即将开始');

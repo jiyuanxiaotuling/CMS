@@ -11,6 +11,8 @@
 <%@ page import="javax.lang.model.type.ArrayType" %>
 <%@ page import="model.EM" %>
 <%@ page import="model.SE" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="model.countSe" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
@@ -18,20 +20,26 @@
 <%--        此处用了强制加载CSS属性，全部完工后可以删除--%>
         <link rel="stylesheet" type="text/css" href="CSS/main.css?v=<%= System.currentTimeMillis() %>">
         <link rel="stylesheet" type="text/css" href="CSS/service.css?v=<%= System.currentTimeMillis() %>">
-        <script charset="utf-8" src="JS/showContent.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/CRUD_Cs.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/importCs.js?v=<%= System.currentTimeMillis() %>"></script>
         <script charset="utf-8"  src="JS/underPhoto.js?v=<%= System.currentTimeMillis() %>"></script>
-        <script charset="utf-8"  src="JS/backup.js?v=<%= System.currentTimeMillis() %>"></script>
-        <script charset="utf-8"  src="JS/notificationIcon.js?v=<%= System.currentTimeMillis() %>"></script>
-        <script charset="utf-8"  src="JS/checkActivity.js?v=<%= System.currentTimeMillis() %>"></script>
+<%--        <script charset="utf-8"  src="JS/backup.js?v=<%= System.currentTimeMillis() %>"></script>--%>
+<%--        <script charset="utf-8"  src="JS/notificationIcon.js?v=<%= System.currentTimeMillis() %>"></script>--%>
+<%--        <script charset="utf-8"  src="JS/checkActivity.js?v=<%= System.currentTimeMillis() %>"></script>--%>
+        <script charset="utf-8"  src="JS/selectCs.js?v=<%= System.currentTimeMillis() %>"></script>
+        <script charset="utf-8"  src="JS/exportSelectAll.js?v=<%= System.currentTimeMillis() %>"></script>
+        <script charset="utf-8"  src="JS/exportCs.js?v=<%= System.currentTimeMillis() %>"></script>
         <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js?v=<%= System.currentTimeMillis() %>"></script>
         <title>客户资源管理</title>
     </head>
-    <body onload="notificationIcon()">
+    <body>
+    <%
+        int month =  LocalDate.now().getMonthValue();
+    %>
         <div class="top-container">
             <h2 class="head-title">客户资源管理系统</h2>
         </div>
@@ -79,12 +87,122 @@
             <%
                 }
             %>
+            <script charset="utf-8" src="JS/showContent.js"></script>
         </div>
         <%--右侧整个大容器--%>
-        <div class="right-container" class="main_content">
-        <%--    系统主页对应的右侧页面--%>
-            <div id="content1" style="display: block"></div>
-        <!--      客户管理对应的右侧页面-->
+        <div class="right-container">
+            <div id="content1" style="display: block" class="main_content">
+                <div class="increaseInfo">
+                    <span class="increaseIcon"></span>
+                    <p class="increaseP">新增信息</p>
+                    <div class="increaseRate">
+                        <p class="increaseTitle" style="margin-left: 20px">新增客户</p>
+                        <p style="position: absolute;margin-top: 70px;margin-left: 20px"><%= new DB().findIncreaseCs(month)%>人</p>
+                        <p style="position: absolute;margin-top: 130px;margin-left: 20px">较上月增加<%= new DB().findIncreaseCs(month)-new DB().findIncreaseCs((month - 1 + 12) % 12)%>人</p>
+                    </div>
+                    <div class="increaseRate">
+                        <p class="increaseTitle" style="margin-left: 20px">新增客服请求</p>
+                        <p style="position: absolute;margin-top: 70px;margin-left: 20px"><%= new DB().findIncreaseSe(month)%>个</p>
+                        <p style="position: absolute;margin-top: 130px;margin-left: 20px">较上月增加<%= new DB().findIncreaseSe(month)-new DB().findIncreaseSe((month - 1 + 12) % 12)%>个</p>
+                    </div>
+                    <div class="increaseRate">
+                        <p class="increaseTitle" style="margin-left: 20px">新增市场活动</p>
+                        <p style="position: absolute;margin-top: 70px;margin-left: 20px"><%= new DB().findIncreaseAc(month)%>个</p>
+                        <p style="position: absolute;margin-top: 130px;margin-left: 20px">较上月增加<%= new DB().findIncreaseAc(month)-new DB().findIncreaseAc((month - 1 + 12) % 12)%>个</p>
+                    </div>
+                    <div class="increaseRate">
+                        <p class="increaseTitle" style="margin-left: 20px">新增员工</p>
+                        <p style="position: absolute;margin-top: 70px;margin-left: 20px"><%= new DB().findIncreaseEm(month)%>人</p>
+                        <p style="position: absolute;margin-top: 130px;margin-left: 20px">较上月增加<%= new DB().findIncreaseEm(month)-new DB().findIncreaseEm((month - 1 + 12) % 12)%>人</p>
+                    </div>
+                </div>
+                <div class="dealChart">
+                    <p style="position: absolute;font-size: 18px">客户请求完成情况</p>
+                    <div id="chartContainer" style="height: 350px; width: 100%; margin-top: 70px">
+                        <script type="text/javascript">
+                            // 获取当前日期
+                            var currentDate = new Date();
+                            // 获取当前月份
+                            var currentMonth = currentDate.getMonth();
+                            // 创建一个数组，存储前6个月到本月的月份名称
+                            var monthNames = ["1", "2", "3", "4", "5", "6",
+                                "7", "8", "9", "10", "11", "12"];
+                            var months = [];
+                            for (var i = 0; i < 7; i++) {
+// 计算前6个月到本月的月份索引（从0开始）
+                                var monthIndex = (currentMonth - 6 + i + 12) % 12;
+// 将对应的月份名称添加到数组中
+                                months.push(monthNames[monthIndex]);
+                            }
+
+                            // 创建一个数组，存储前6个月到本月的数量数据（由您给出）
+                            var dataPoints = [<%= new DB().findIncreaseSeStatus((month - 6 + 12) % 12)%>, <%= new DB().findIncreaseSeStatus((month - 5 + 12) % 12)%>, <%= new DB().findIncreaseSeStatus((month - 4 + 12) % 12)%>, <%= new DB().findIncreaseSeStatus((month - 3 + 12) % 12)%>, <%= new DB().findIncreaseSeStatus((month - 2 + 12) % 12)%>, <%= new DB().findIncreaseSeStatus((month - 1 + 12) % 12)%>, <%= new DB().findIncreaseSeStatus(month)%>];
+                            // 使用CanvasJS.Chart构造函数来创建一个图表对象
+                            var chart = new CanvasJS.Chart("chartContainer", {
+// 指定图表的主题
+                                theme: "light2",
+// 指定图表的标题
+                                title:{
+                                    text: "近6个月请求处理数量"
+                                },
+// 指定图表的横轴
+                                axisX:{
+                                    title: "月份",
+// 将横轴的标签设置为月份名称
+                                    labelFormatter: function(e) {
+                                        return months[e.value];
+                                    }
+                                },
+// 指定图表的纵轴
+                                axisY:{
+                                    title: "数量",
+                                    includeZero: false
+                                },
+// 指定图表的数据
+                                data: [{
+                                    type: "line",
+                                    markerSize: 5,
+// 将数据点设置为数量数据
+                                    dataPoints: dataPoints.map(function(value, index) {
+                                        return {x: index, y: value};
+                                    })
+                                }]
+                            });
+                            // 调用图表对象的render方法来渲染图表
+                            chart.render();
+                        </script>
+                    </div>
+                </div>
+                <div class="rankChart">
+                    <p style="position: absolute;font-size: 18px">客服排行榜</p>
+                    <div id="rankchartContainer" style="height: 330px; width: 100%; margin-top: 70px">
+                        <table id="seRankTable">
+                            <tr style="background-color: cornflowerblue">
+                                <th width="200">排名</th>
+                                <th width="200">客服ID</th>
+                                <th width="200">完成数目</th>
+                            </tr>
+                            <%
+                                ArrayList cnt_al=new DB().findSeRank();
+                                Iterator cnt_iter=cnt_al.iterator();
+//                          用来确定是哪一行的按钮
+                                int rank_i = 0;
+                                while(cnt_iter.hasNext()){
+                                    countSe cntse=(countSe) cnt_iter.next();
+                                    rank_i++;
+                            %>
+                            <tr>
+                                <td><%= rank_i%></td>
+                                <td><%= cntse.getEm_id() %></td>
+                                <td><%= cntse.getCount() %></td>
+                            </tr>
+                            <%
+                                }
+                            %>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <div id="content2" style="display: none" class="main_content">
 <%--                导入导出div--%>
                     <div id="IO_div" class="IO_div" style="display: none">
@@ -196,8 +314,6 @@
                     <input type="button" id="out_cs_btn" value="导出" onclick="out_cs()">
                     <input type="button" id="out_cs_btn_back" value="取消" onclick="close_out_cs()">
                 </div>
-                <script charset="utf-8"  src="JS/exportSelectAll.js?v=<%= System.currentTimeMillis() %>"></script>
-                <script charset="utf-8"  src="JS/exportCs.js?v=<%= System.currentTimeMillis() %>"></script>
 
                 <%--    用户表格存放容器--%>
                 <div id="cs_table_container">
@@ -248,7 +364,7 @@
                             }
                             %>
                     </table>
-                    <script charset="utf-8"  src="JS/selectCs.js?v=<%= System.currentTimeMillis() %>"></script>
+
                 </div>
             </div>
             <div id="content3" style="display: none" class="main_content">
@@ -490,6 +606,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
+        </div>
     </body>
 </html>
